@@ -2,6 +2,12 @@
   "name": "citibeer",
   "version": "0.1.0",
   "private": true,
+  "author": "Miguel RA",
+  "homepage": "https://miguel-ra.github.io/citibeer/",
+  "engines": {
+    "node": ">=12",
+    "npm": ">=6"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
@@ -10,6 +16,7 @@
     "@types/node": "^12.20.4",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
+    "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.3",
