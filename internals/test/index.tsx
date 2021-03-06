@@ -2,7 +2,7 @@ import { FC, ReactElement } from "react";
 import { render as rtlRender } from "@testing-library/react";
 import Providers from "store/Providers";
 
-function render(ui: ReactElement) {
+function renderWithProviders(ui: ReactElement) {
   const Wrapper: FC = ({ children }) => (
     <Providers options={{ queryClient: { queries: { retry: false } } }}>
       {children}
@@ -13,4 +13,4 @@ function render(ui: ReactElement) {
 
 export * from "@testing-library/react";
 // override React Testing Library's render with our own
-export { render };
+export { renderWithProviders };

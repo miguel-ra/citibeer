@@ -1,7 +1,7 @@
 import faker from "faker";
 import { Beer } from "models/beers/Beer";
 
-function generateBeer(id: number): Beer {
+function generateBeer(id: number = 0): Beer {
   const pastDate = faker.date.past();
   const month = pastDate.getUTCMonth() + 1;
   const year = pastDate.getUTCFullYear();
@@ -29,4 +29,4 @@ function generateBeers({ numOfBeers = 10 } = {}): Beer[] {
   return beers;
 }
 
-export { generateBeers };
+export { generateBeer, generateBeers };

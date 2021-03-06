@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { ForwardedRef, forwardRef, useEffect, useState } from "react";
 import { ReactComponent as IconSpinner } from "assets/icons/spinner.svg";
 import classes from "./Spinner.module.scss";
 
-function Spinner({ delay = 250 }) {
+function Spinner({ delay = 250 }, ref: ForwardedRef<SVGSVGElement>) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -20,6 +20,7 @@ function Spinner({ delay = 250 }) {
 
   return (
     <IconSpinner
+      ref={ref}
       role="alert"
       aria-busy="true"
       aria-label="spinner"
@@ -29,4 +30,4 @@ function Spinner({ delay = 250 }) {
   );
 }
 
-export default Spinner;
+export default forwardRef(Spinner);

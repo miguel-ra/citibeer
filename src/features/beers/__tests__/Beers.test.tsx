@@ -1,6 +1,6 @@
 import { mocked } from "ts-jest/utils";
 import {
-  render,
+  renderWithProviders,
   screen,
   waitFor,
   waitForElementToBeRemoved,
@@ -30,7 +30,7 @@ describe("Beers", () => {
     const { promise, resolve } = deferred<Beer[]>();
     mockedBeersRepository.getAll.mockImplementation(() => promise);
 
-    render(<Beers />);
+    renderWithProviders(<Beers />);
 
     await waitFor(() =>
       expect(
@@ -48,7 +48,7 @@ describe("Beers", () => {
   test("Should show error message if the respository fails", async () => {
     mockedBeersRepository.getAll.mockRejectedValue(new BeersInvalidData());
 
-    render(<Beers />);
+    renderWithProviders(<Beers />);
 
     await waitFor(() =>
       expect(screen.getByText(/failed to get data/i)).toBeInTheDocument()
@@ -58,7 +58,7 @@ describe("Beers", () => {
   test("Should show default message if there are not beers to show", async () => {
     mockedBeersRepository.getAll.mockResolvedValue([]);
 
-    render(<Beers />);
+    renderWithProviders(<Beers />);
 
     await waitFor(() =>
       expect(screen.getByText(/no data to display/i)).toBeInTheDocument()
@@ -68,7 +68,7 @@ describe("Beers", () => {
   test("Should render beers", async () => {
     mockedBeersRepository.getAll.mockResolvedValue(beers);
 
-    render(<Beers />);
+    renderWithProviders(<Beers />);
 
     await waitFor(() =>
       expect(

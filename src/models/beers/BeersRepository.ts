@@ -1,5 +1,9 @@
 import { Beer } from "./Beer";
 
+export type GetAllParams = {
+  page: number;
+};
+
 export interface BeersRepository {
-  getAll(): Promise<Beer[]>;
+  getAll(params?: GetAllParams): Promise<Beer[]>;
 }
