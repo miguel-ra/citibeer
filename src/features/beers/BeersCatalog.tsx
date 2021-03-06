@@ -1,8 +1,10 @@
 import { useInfiniteQuery } from "react-query";
 import BeersRepository from "services/beers/BeersRepository";
+import useInView from "shared/hooks/useInView";
+import ConditionalRender from "components/layout/ConditionalRender";
 import Spinner from "components/spinner/Spinner";
 import BeersList from "./list/BeersList";
-import useInView from "shared/hooks/useInView";
+import BeersFilters from "./filters/BeersFilters";
 
 function BeersCatalog() {
   const {
@@ -26,24 +28,26 @@ function BeersCatalog() {
       },
     }
   );
+
   const { ref: loadMoreRef } = useInView(fetchNextPage);
 
-  if (isLoading) {
-    return <Spinner />;
-  }
-
-  if (isError) {
-    return <p>Failed to get data</p>;
-  }
-
-  if (!data?.pages || !data.pages[0].length) {
-    return <p>No data to display</p>;
-  }
+  const beers = data?.pages ? data.pages.flat() : [];
 
   return (
     <>
-      <BeersList data={data.pages.flat()} />
-      {hasNextPage && <Spinner ref={loadMoreRef} />}
+      <BeersFilters />
+      <ConditionalRender
+        conditions={[
+          [isLoading, <Spinner />],
+          [isError, <p>Failed to get data</p>],
+          [!beers.length, <p>No data to display</p>],
+        ]}
+      >
+        <>
+          <BeersList data={beers} />
+          {hasNextPage && <Spinner ref={loadMoreRef} />}
+        </>
+      </ConditionalRender>
     </>
   );
 }

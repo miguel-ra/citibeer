@@ -6,6 +6,7 @@
   color: $white;
   position: relative;
   padding: 6rem;
+  padding-bottom: 7rem;
   background-color: $purple;
 }
 
@@ -15,6 +16,6 @@
   padding: 1.7rem 3.2rem;
   @media screen and (min-width: $breakpointMedium) {
     max-width: $breakpointLarge;
-    padding: 3.2rem;
+    padding: 0 3.2rem 3.2rem;
   }
 }

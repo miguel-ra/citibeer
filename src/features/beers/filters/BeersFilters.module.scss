@@ -1,0 +1,15 @@
+@import "styles/colors";
+@import "styles/shapes";
+
+.wrapper {
+  background: $white;
+  width: 100%;
+  box-shadow: $boxShadow;
+  border-radius: $borderRadius;
+  padding: 2rem;
+  display: flex;
+  margin-top: -2rem;
+  position: relative;
+  display: flex;
+  gap: 2rem;
+}
