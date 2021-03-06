@@ -1,24 +1,25 @@
 {
   "files": {
-    "main.css": "/citibeer/static/css/main.b77c446a.chunk.css",
-    "main.js": "/citibeer/static/js/main.7e566810.chunk.js",
-    "main.js.map": "/citibeer/static/js/main.7e566810.chunk.js.map",
-    "runtime-main.js": "/citibeer/static/js/runtime-main.c9c2610a.js",
-    "runtime-main.js.map": "/citibeer/static/js/runtime-main.c9c2610a.js.map",
-    "static/js/2.cac09198.chunk.js": "/citibeer/static/js/2.cac09198.chunk.js",
-    "static/js/2.cac09198.chunk.js.map": "/citibeer/static/js/2.cac09198.chunk.js.map",
-    "static/js/3.1aa411ce.chunk.js": "/citibeer/static/js/3.1aa411ce.chunk.js",
-    "static/js/3.1aa411ce.chunk.js.map": "/citibeer/static/js/3.1aa411ce.chunk.js.map",
+    "main.css": "/citibeer/static/css/main.0323f3cf.chunk.css",
+    "main.js": "/citibeer/static/js/main.6ea7784c.chunk.js",
+    "main.js.map": "/citibeer/static/js/main.6ea7784c.chunk.js.map",
+    "runtime-main.js": "/citibeer/static/js/runtime-main.6ee0dffe.js",
+    "runtime-main.js.map": "/citibeer/static/js/runtime-main.6ee0dffe.js.map",
+    "static/js/2.59803aa6.chunk.js": "/citibeer/static/js/2.59803aa6.chunk.js",
+    "static/js/2.59803aa6.chunk.js.map": "/citibeer/static/js/2.59803aa6.chunk.js.map",
+    "static/js/3.469f84b5.chunk.js": "/citibeer/static/js/3.469f84b5.chunk.js",
+    "static/js/3.469f84b5.chunk.js.map": "/citibeer/static/js/3.469f84b5.chunk.js.map",
     "index.html": "/citibeer/index.html",
-    "static/css/main.b77c446a.chunk.css.map": "/citibeer/static/css/main.b77c446a.chunk.css.map",
-    "static/js/2.cac09198.chunk.js.LICENSE.txt": "/citibeer/static/js/2.cac09198.chunk.js.LICENSE.txt",
+    "static/css/main.0323f3cf.chunk.css.map": "/citibeer/static/css/main.0323f3cf.chunk.css.map",
+    "static/js/2.59803aa6.chunk.js.LICENSE.txt": "/citibeer/static/js/2.59803aa6.chunk.js.LICENSE.txt",
     "static/media/global.scss": "/citibeer/static/media/QuicksandCitibox.fd1ef21c.eot",
+    "static/media/barrel.0dcab2ca.svg": "/citibeer/static/media/barrel.0dcab2ca.svg",
     "static/media/spinner.9444fa5b.svg": "/citibeer/static/media/spinner.9444fa5b.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.c9c2610a.js",
-    "static/js/2.cac09198.chunk.js",
-    "static/css/main.b77c446a.chunk.css",
-    "static/js/main.7e566810.chunk.js"
+    "static/js/runtime-main.6ee0dffe.js",
+    "static/js/2.59803aa6.chunk.js",
+    "static/css/main.0323f3cf.chunk.css",
+    "static/js/main.6ea7784c.chunk.js"
   ]
 }
