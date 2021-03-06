@@ -1,0 +1,107 @@
+@import "styles/breakpoints";
+@import "styles/colors";
+@import "styles/shapes";
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 4rem;
+  margin: 3rem 0;
+
+  @media screen and (min-width: $breakpointMedium) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.beer {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+  background-color: $white;
+  border-radius: $borderRadius;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.15s linear;
+  opacity: 1;
+  min-height: 25rem;
+  outline-offset: 4px;
+  -webkit-tap-highlight-color: transparent;
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+.figure {
+  display: grid;
+  position: relative;
+  place-content: center;
+  background-color: $turquoise;
+  border-top-left-radius: $borderRadius;
+  border-bottom-left-radius: $borderRadius;
+  width: 10rem;
+  padding: 1rem;
+  margin: 0;
+  z-index: 1;
+
+  img {
+    width: auto;
+    height: auto;
+    max-width: 8rem;
+    max-height: 20rem;
+  }
+  figcaption {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 5rem;
+    line-height: 5rem;
+    transform: translate(-30%, -30%) rotate(-10deg);
+    transform-origin: center center;
+  }
+
+  @media screen and (min-width: $breakpointSmall) {
+    width: 15rem;
+    padding: 2rem;
+  }
+
+  @media screen and (min-width: $breakpointLarge) {
+    width: 25rem;
+  }
+}
+
+.details {
+  flex: 1;
+  padding: 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: $breakpointMedium) {
+    // justify-content: center;
+  }
+}
+
+.date {
+  margin-bottom: 1rem;
+  text-align: right;
+  @media screen and (min-width: $breakpointSmall) {
+    margin-bottom: 2rem;
+  }
+}
+
+.name {
+  font-size: 2.4rem;
+
+  @media screen and (min-width: $breakpointMedium) {
+    font-size: 2.8rem;
+  }
+
+  @media screen and (min-width: $breakpointLarge) {
+    font-size: 3rem;
+  }
+}
+
+.tagline {
+  margin-bottom: 0;
+}

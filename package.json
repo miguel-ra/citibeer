@@ -16,6 +16,7 @@
     "@types/node": "^12.20.4",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
+    "lodash": "^4.17.21",
     "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -47,5 +48,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/faker": "^5.1.7",
+    "@types/lodash": "^4.14.168",
+    "faker": "^5.4.0",
+    "jest": "26.6.0",
+    "ts-jest": "^26.5.3"
   }
 }

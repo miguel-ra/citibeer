@@ -1,19 +1,25 @@
 import { ReactNode } from "react";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { DefaultOptions, QueryClient, QueryClientProvider } from "react-query";
+import merge from "lodash/merge";
 
 type ProvidersProps = {
   children: ReactNode;
+  options?: {
+    queryClient: Partial<DefaultOptions>;
+  };
 };
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-    },
+const queryClientDefaultOptions = {
+  queries: {
+    refetchOnWindowFocus: false,
   },
-});
+};
 
-function Providers({ children }: ProvidersProps) {
+function Providers({ children, options }: ProvidersProps) {
+  const queryClient = new QueryClient({
+    defaultOptions: merge(queryClientDefaultOptions, options?.queryClient),
+  });
+
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );

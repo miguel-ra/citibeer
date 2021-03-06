@@ -1,6 +1,7 @@
 import { useQuery } from "react-query";
 import BeersRepository from "services/beers/BeersRepository";
 import Spinner from "components/spinner/Spinner";
+import ListBeer from "./list/ListBeer";
 
 function Beers() {
   const { data, isLoading, isError } = useQuery(
@@ -20,13 +21,7 @@ function Beers() {
     return <p>No data to display</p>;
   }
 
-  return (
-    <ul>
-      {data?.map((beer) => (
-        <li key={beer.id}>{beer.name}</li>
-      ))}
-    </ul>
-  );
+  return <ListBeer data={data} />;
 }
 
 export default Beers;

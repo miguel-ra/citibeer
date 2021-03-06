@@ -19,7 +19,13 @@ function Spinner({ delay = 250 }) {
   }
 
   return (
-    <IconSpinner role="img" aria-label="spinner" className={classes.icon} />
+    <IconSpinner
+      role="alert"
+      aria-busy="true"
+      aria-label="spinner"
+      aria-hidden="false"
+      className={classes.spinner}
+    />
   );
 }
 
