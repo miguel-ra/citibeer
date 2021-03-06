@@ -1,6 +1,20 @@
-@import "./styles/colors.scss";
+@import "styles/colors.scss";
+@import "styles//breakpoints.scss";
 
 .header {
   text-align: center;
-  color: $purple;
+  color: $turquoise;
+}
+
+.main {
+  max-width: $breakpoint-large;
+  width: 100%;
+  margin: 0 auto;
+  padding: 3.2rem;
+}
+
+@media screen and (max-width: $breakpoint-medium) {
+  .main {
+    padding: 1.7rem 3.2rem;
+  }
 }

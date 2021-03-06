@@ -1,12 +1,16 @@
+import Beers from "features/beers/Beers";
 import classes from "./App.module.scss";
 
 function App() {
   return (
-    <div className={classes.wrapper}>
+    <>
       <header className={classes.header}>
         <h1>Citibeer</h1>
       </header>
-    </div>
+      <main className={classes.main}>
+        <Beers />
+      </main>
+    </>
   );
 }
 

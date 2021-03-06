@@ -1,12 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Providers from "store/Providers";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./styles/global.scss";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Providers>
+      <App />
+    </Providers>
   </React.StrictMode>,
   document.getElementById("root")
 );

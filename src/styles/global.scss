@@ -1,10 +1,11 @@
+@import "./colors";
+
 /**
   eot: IE9 Compat Modes
   woff: Modern Browsers
   ttf: Safari, Android, iOS
   svg: Legacy iOS
 **/
-
 @font-face {
   font-family: "QuicksandCitibox";
   src: url("../assets/fonts/QuicksandCitibox/QuicksandCitibox.eot");
@@ -18,6 +19,10 @@
   font-style: normal;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html,
 body,
 #root {
@@ -25,6 +30,8 @@ body,
   height: 100%;
   touch-action: pan-y;
   overflow: visible;
+  background-color: $black;
+  color: $white;
 }
 
 html {
