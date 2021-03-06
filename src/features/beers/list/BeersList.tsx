@@ -1,9 +1,9 @@
 import { Beer } from "models/beers/Beer";
 import barrelSrc from "assets/barrel.svg";
 import AbvEmoji from "./AbvEmoji";
-import classes from "./ListBeer.module.scss";
+import classes from "./BeersList.module.scss";
 
-type ListBeerProps = {
+type BeersListProps = {
   data: Beer[];
 };
 
@@ -16,7 +16,7 @@ function parseDate(dateString: string) {
   return date.toLocaleString("en-GB", { month: "long", year: "numeric" });
 }
 
-function ListBeer({ data }: ListBeerProps) {
+function BeersList({ data }: BeersListProps) {
   return (
     <section className={classes.container}>
       {data?.map((beer) => (
@@ -38,4 +38,4 @@ function ListBeer({ data }: ListBeerProps) {
   );
 }
 
-export default ListBeer;
+export default BeersList;

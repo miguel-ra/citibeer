@@ -1,4 +1,4 @@
-import Beers from "features/beers/Beers";
+import BeersCatalog from "features/beers/BeersCatalog";
 import { useEffect } from "react";
 import useEventListener from "shared/hooks/useEventListener";
 import classes from "./App.module.scss";
@@ -24,7 +24,7 @@ function App() {
         <h1>Citibeer</h1>
       </header>
       <main className={classes.main}>
-        <Beers />
+        <BeersCatalog />
       </main>
     </>
   );

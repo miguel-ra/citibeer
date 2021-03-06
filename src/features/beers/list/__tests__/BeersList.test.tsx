@@ -1,13 +1,13 @@
 import { render, screen } from "../../../../../internals/test";
 import { generateBeer } from "../../../../../internals/test/mocks/beers";
-import ListBeer from "../ListBeer";
+import BeersList from "../BeersList";
 
-describe("ListBeer", () => {
+describe("BeersList", () => {
   test("Should render beer card", () => {
     const beer = generateBeer();
     const abv = 0;
     const first_brewed = "1/2018";
-    render(<ListBeer data={[{ ...beer, abv, first_brewed }]} />);
+    render(<BeersList data={[{ ...beer, abv, first_brewed }]} />);
 
     expect(screen.getByRole("img", { name: beer.name })).toBeInTheDocument();
     expect(
@@ -26,7 +26,7 @@ describe("ListBeer", () => {
     const beer = generateBeer();
     const first_brewed = "2018";
 
-    render(<ListBeer data={[{ ...beer, first_brewed }]} />);
+    render(<BeersList data={[{ ...beer, first_brewed }]} />);
 
     expect(screen.getByText(first_brewed)).toBeInTheDocument();
   });

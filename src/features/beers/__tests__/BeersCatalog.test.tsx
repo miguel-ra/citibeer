@@ -6,7 +6,7 @@ import {
   waitForElementToBeRemoved,
 } from "../../../../internals/test";
 import { generateBeers } from "../../../../internals/test/mocks/beers";
-import Beers from "../Beers";
+import BeersCatalog from "../BeersCatalog";
 import BeersRepository from "services/beers/BeersRepository";
 import { Beer } from "models/beers/Beer";
 import BeersInvalidData from "models/beers/errors/BeersInvalidData";
@@ -25,12 +25,12 @@ function deferred<T>() {
   return { promise, resolve, reject };
 }
 
-describe("Beers", () => {
+describe("BeersCatalog", () => {
   test("Should render spinner", async () => {
     const { promise, resolve } = deferred<Beer[]>();
     mockedBeersRepository.getAll.mockImplementation(() => promise);
 
-    renderWithProviders(<Beers />);
+    renderWithProviders(<BeersCatalog />);
 
     await waitFor(() =>
       expect(
@@ -48,7 +48,7 @@ describe("Beers", () => {
   test("Should show error message if the respository fails", async () => {
     mockedBeersRepository.getAll.mockRejectedValue(new BeersInvalidData());
 
-    renderWithProviders(<Beers />);
+    renderWithProviders(<BeersCatalog />);
 
     await waitFor(() =>
       expect(screen.getByText(/failed to get data/i)).toBeInTheDocument()
@@ -58,7 +58,7 @@ describe("Beers", () => {
   test("Should show default message if there are not beers to show", async () => {
     mockedBeersRepository.getAll.mockResolvedValue([]);
 
-    renderWithProviders(<Beers />);
+    renderWithProviders(<BeersCatalog />);
 
     await waitFor(() =>
       expect(screen.getByText(/no data to display/i)).toBeInTheDocument()
@@ -68,7 +68,7 @@ describe("Beers", () => {
   test("Should render beers", async () => {
     mockedBeersRepository.getAll.mockResolvedValue(beers);
 
-    renderWithProviders(<Beers />);
+    renderWithProviders(<BeersCatalog />);
 
     await waitFor(() =>
       expect(

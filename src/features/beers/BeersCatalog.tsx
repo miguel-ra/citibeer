@@ -1,10 +1,10 @@
 import { useInfiniteQuery } from "react-query";
 import BeersRepository from "services/beers/BeersRepository";
 import Spinner from "components/spinner/Spinner";
-import ListBeer from "./list/ListBeer";
+import BeersList from "./list/BeersList";
 import useInView from "shared/hooks/useInView";
 
-function Beers() {
+function BeersCatalog() {
   const {
     data,
     isLoading,
@@ -42,10 +42,10 @@ function Beers() {
 
   return (
     <>
-      <ListBeer data={data.pages.flat()} />
+      <BeersList data={data.pages.flat()} />
       {hasNextPage && <Spinner ref={loadMoreRef} />}
     </>
   );
 }
 
-export default Beers;
+export default BeersCatalog;
