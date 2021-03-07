@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 
-function useInView(
+const defaultOptions = { rootMargin: "200px" };
+
+function useObserver(
   callback: Function,
-  options: IntersectionObserverInit = { rootMargin: "200px" }
+  options: IntersectionObserverInit = defaultOptions
 ) {
   const [element, setElement] = useState<Element | null>(null);
 
@@ -17,10 +19,12 @@ function useInView(
     }, options);
     observer.observe(element);
 
-    return () => observer.unobserve(element);
-  }, [element, callback, options]);
+    return () => {
+      observer.unobserve(element);
+    };
+  }, [callback, element, options]);
 
   return { ref: setElement };
 }
 
-export default useInView;
+export default useObserver;

@@ -2,17 +2,30 @@ import { ForwardedRef, forwardRef, useEffect, useState } from "react";
 import { ReactComponent as IconSpinner } from "assets/icons/spinner.svg";
 import classes from "./Spinner.module.scss";
 
-function Spinner({ delay = 250 }, ref: ForwardedRef<SVGSVGElement>) {
-  const [visible, setVisible] = useState(false);
+type SpinnerProps = {
+  visible?: boolean;
+  delay?: number;
+};
+
+const defaultDelay = 250;
+
+function Spinner(
+  { visible: visibleProp, delay }: SpinnerProps = { delay: defaultDelay },
+  ref: ForwardedRef<SVGSVGElement>
+) {
+  const [visible, setVisible] = useState(visibleProp);
 
   useEffect(() => {
+    if (visible) {
+      return;
+    }
     const timeoutId = setTimeout(() => {
       setVisible(true);
-    }, delay);
+    }, 250);
     return () => {
       clearTimeout(timeoutId);
     };
-  }, [delay]);
+  }, [delay, visible]);
 
   if (!visible) {
     return null;

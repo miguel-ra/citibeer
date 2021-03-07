@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { debounce } from "lodash";
 import { InputHTMLAttributes, useCallback, useEffect, useState } from "react";
 import classes from "./Field.module.scss";
 
@@ -6,25 +7,35 @@ type FieldProps = {
   label: string;
   name: string;
   pattern?: RegExp;
-} & Omit<InputHTMLAttributes<HTMLInputElement>, "pattern" | "name">;
+  onChange: (value: string) => void;
+} & Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "pattern" | "name" | "onChange"
+>;
 
 function Field({
   label,
   name,
-  value: valueProp = "",
+  value: valueProp,
   pattern,
   className,
   onChange,
   ...props
 }: FieldProps) {
-  const [internalValue, setInternalValue] = useState(valueProp);
+  const [internalValue, setInternalValue] = useState(valueProp || "");
 
   useEffect(() => {
     if (valueProp !== internalValue) {
-      setInternalValue(valueProp);
+      setInternalValue(valueProp || "");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [valueProp]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debounceOnChange = useCallback(
+    debounce((value) => onChange?.(value), 300),
+    []
+  );
 
   const handleChange = useCallback(
     (event) => {
@@ -36,8 +47,9 @@ function Field({
         }
       }
       setInternalValue(value);
+      debounceOnChange(value);
     },
-    [pattern]
+    [debounceOnChange, pattern]
   );
 
   return (
