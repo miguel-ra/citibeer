@@ -1,6 +1,6 @@
-import BeersCatalog from "features/beers/BeersCatalog";
 import { useEffect } from "react";
 import useEventListener from "shared/hooks/useEventListener";
+import BeersCatalog from "features/beers/BeersCatalog";
 import classes from "./App.module.scss";
 
 function App() {

@@ -1,4 +1,4 @@
-import { renderWithProviders, screen } from "../../internals/test";
+import { renderWithProviders, screen } from "../../../../internals/test";
 import App from "../App";
 
 describe("App", () => {

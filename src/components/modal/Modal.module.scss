@@ -1,0 +1,38 @@
+@import "styles/colors";
+@import "styles/shapes";
+@import "styles/breakpoints";
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #{$black}AA;
+  transition: background 0.25s linear;
+  backdrop-filter: blur(0.4rem);
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: $white;
+  transition: background 0.25s linear, border 0.25s linear;
+  outline: none;
+  z-index: 1;
+
+  @media screen and (min-width: $breakpointSmall) {
+    border: 1px solid $lightGray;
+    border-radius: $borderRadius;
+    top: 50%;
+    left: 50%;
+    min-width: 60vw;
+    height: auto;
+    width: auto;
+    transform: translate(-50%, -50%);
+  }
+}

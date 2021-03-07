@@ -5,6 +5,7 @@ import classes from "./BeersList.module.scss";
 
 type BeersListProps = {
   data: Beer[];
+  onShowDetails: (beer: Beer) => void;
 };
 
 function parseDate(dateString: string) {
@@ -16,11 +17,16 @@ function parseDate(dateString: string) {
   return date.toLocaleString("en-GB", { month: "long", year: "numeric" });
 }
 
-function BeersList({ data }: BeersListProps) {
+function BeersList({ data, onShowDetails }: BeersListProps) {
   return (
     <section className={classes.container}>
       {data?.map((beer) => (
-        <article key={beer.id} className={classes.beer} tabIndex={0}>
+        <article
+          key={beer.id}
+          className={classes.beer}
+          tabIndex={0}
+          onClick={() => onShowDetails(beer)}
+        >
           <figure className={classes.figure}>
             <img src={beer.image_url || barrelSrc} alt={beer.name} />
             <figcaption>

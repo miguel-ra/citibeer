@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Providers from "store/Providers";
-import App from "./App";
+import App from "features/app/App";
 import reportWebVitals from "./reportWebVitals";
 import "./styles/global.scss";
 

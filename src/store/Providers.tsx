@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
-import { DefaultOptions, QueryClient, QueryClientProvider } from "react-query";
 import merge from "lodash/merge";
+import { DefaultOptions, QueryClient, QueryClientProvider } from "react-query";
+import { ModalProvider } from "./modalContext";
 
 type ProvidersProps = {
   children: ReactNode;
@@ -21,7 +22,9 @@ function Providers({ children, options }: ProvidersProps) {
   });
 
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <ModalProvider>{children}</ModalProvider>
+    </QueryClientProvider>
   );
 }
 

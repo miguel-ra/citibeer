@@ -4,12 +4,17 @@ import useObserver from "shared/hooks/useObserver";
 import Spinner from "components/spinner/Spinner";
 import BeersList from "./list/BeersList";
 import { useFilters } from "./filters/filtersContext";
+import { useModal } from "store/modalContext";
+import { useCallback } from "react";
+import { Beer } from "models/beers/Beer";
+import BeerDetail from "./detail/BeerDetail";
 
 const observerOptions = { rootMargin: "300px" };
 const pageSize = 25;
 
 function BeersData() {
   const { filters } = useFilters();
+  const { openModal } = useModal();
   const {
     data,
     isLoading,
@@ -32,6 +37,14 @@ function BeersData() {
     }
   );
   const { ref: loadMoreRef } = useObserver(fetchNextPage, observerOptions);
+
+  const handleBeerDetail = useCallback(
+    (beer: Beer) => {
+      openModal(<BeerDetail data={beer} />);
+    },
+    [openModal]
+  );
+
   const lastPage = data?.pages[data.pages.length - 1];
   const beers = data?.pages ? data.pages.flat() : [];
 
@@ -49,7 +62,7 @@ function BeersData() {
 
   return (
     <>
-      <BeersList data={beers} />
+      <BeersList data={beers} onShowDetails={handleBeerDetail} />
       {hasNextPage && lastPage?.length === pageSize && (
         <Spinner ref={loadMoreRef} visible />
       )}
