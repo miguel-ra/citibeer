@@ -1,0 +1,29 @@
+@import "styles/colors";
+@import "styles/shapes";
+@import "styles/breakpoints";
+
+.button {
+  background-color: $turquoise;
+  border-radius: 3rem;
+  border: none;
+  padding: 1.2rem;
+  min-width: 100%;
+  color: $white;
+  font-weight: bold;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.15s linear, transform 0.15s linear;
+  &:hover {
+    background-color: $turquoiseDark;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+
+  @media screen and (min-width: $breakpointSmall) {
+    font-size: 1.8rem;
+    min-width: 200px;
+  }
+}

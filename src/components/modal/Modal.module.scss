@@ -24,15 +24,17 @@
   transition: background 0.25s linear, border 0.25s linear;
   outline: none;
   z-index: 1;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
   @media screen and (min-width: $breakpointSmall) {
-    border: 1px solid $lightGray;
+    box-shadow: $boxShadow;
     border-radius: $borderRadius;
     top: 50%;
     left: 50%;
-    min-width: 60vw;
+    width: 60vw;
+    max-width: $breakpointLarge;
     height: auto;
-    width: auto;
     transform: translate(-50%, -50%);
   }
 }

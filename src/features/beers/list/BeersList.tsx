@@ -26,6 +26,9 @@ function BeersList({ data, onShowDetails }: BeersListProps) {
           className={classes.beer}
           tabIndex={0}
           onClick={() => onShowDetails(beer)}
+          onKeyDown={(event) => {
+            event.key === "Enter" && onShowDetails(beer);
+          }}
         >
           <figure className={classes.figure}>
             <img src={beer.image_url || barrelSrc} alt={beer.name} />

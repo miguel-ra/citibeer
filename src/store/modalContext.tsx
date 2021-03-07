@@ -3,6 +3,7 @@ import React, {
   Suspense,
   useCallback,
   useContext,
+  useRef,
   useState,
 } from "react";
 
@@ -35,9 +36,11 @@ function useModal() {
 }
 
 function ModalProvider({ children }: ModalProviderProps) {
+  const activeElement = useRef<HTMLElement | null>(null);
   const [content, setContent] = useState<JSX.Element | undefined>();
 
   const openModal = useCallback((newContent: JSX.Element) => {
+    activeElement.current = document.activeElement as HTMLElement;
     document.body.classList.add("preventScroll");
     setContent(newContent);
   }, []);
@@ -45,6 +48,8 @@ function ModalProvider({ children }: ModalProviderProps) {
   const closeModal = useCallback(() => {
     document.body.classList.remove("preventScroll");
     setContent(undefined);
+    activeElement.current?.focus();
+    activeElement.current = null;
   }, []);
 
   return (
