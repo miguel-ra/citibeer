@@ -1,13 +1,18 @@
-@import "styles/colors.scss";
-@import "styles//breakpoints.scss";
+@import "styles/colors";
+@import "styles//breakpoints";
 
 .header {
   text-align: center;
   color: $white;
   position: relative;
-  padding: 6rem;
-  padding-bottom: 7rem;
+  padding: 4rem;
+  padding-bottom: 8rem;
   background-color: $purple;
+
+  @media screen and (min-width: $breakpointSmall) {
+    padding: 5rem;
+    padding-bottom: 8rem;
+  }
 }
 
 .main {

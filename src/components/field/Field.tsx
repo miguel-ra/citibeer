@@ -1,6 +1,12 @@
 import clsx from "clsx";
 import { debounce } from "lodash";
-import { InputHTMLAttributes, useCallback, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  InputHTMLAttributes,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import classes from "./Field.module.scss";
 
 type FieldProps = {
@@ -38,7 +44,7 @@ function Field({
   );
 
   const handleChange = useCallback(
-    (event) => {
+    (event: ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
       if (pattern) {
         const regex = new RegExp(pattern);

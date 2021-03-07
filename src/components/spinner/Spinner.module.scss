@@ -1,8 +1,11 @@
+@import "styles/colors";
+
 .spinner {
   animation: spin 1s linear infinite;
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 3rem;
+  height: 3rem;
   margin: 2rem 0;
+  color: $purple;
 }
 
 @keyframes spin {

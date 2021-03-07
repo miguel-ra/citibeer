@@ -1,5 +1,6 @@
 @import "styles/colors";
 @import "styles/shapes";
+@import "styles/breakpoints";
 
 .wrapper {
   background: $white;
@@ -8,8 +9,14 @@
   border-radius: $borderRadius;
   padding: 2rem;
   display: flex;
-  margin-top: -2rem;
+  margin-top: -6rem;
   position: relative;
   display: flex;
   gap: 2rem;
+  flex-direction: column;
+
+  @media screen and (min-width: $breakpointSmall) {
+    flex-direction: row;
+    margin-top: -3rem;
+  }
 }

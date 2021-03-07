@@ -1,11 +1,18 @@
 @import "styles/colors";
 @import "styles/shapes";
+@import "styles/breakpoints";
 
 .wrapper {
   display: flex;
-  align-items: center;
   gap: 1rem;
   width: 100%;
+  flex-direction: column;
+  justify-content: stretch;
+
+  @media screen and (min-width: $breakpointSmall) {
+    flex-direction: row;
+    align-items: center;
+  }
 }
 
 .label {
@@ -15,10 +22,11 @@
 
 .input {
   flex: 1;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
+  width: auto;
   border: 1px solid $gray;
   border-radius: $borderRadius/2;
-  height: 3.5rem;
+  background-color: $white;
   &:focus {
     border-color: $turquoise;
   }
