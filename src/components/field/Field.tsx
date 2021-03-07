@@ -1,5 +1,3 @@
-import clsx from "clsx";
-import { debounce } from "lodash";
 import {
   ChangeEvent,
   InputHTMLAttributes,
@@ -7,13 +5,15 @@ import {
   useEffect,
   useState,
 } from "react";
+import clsx from "clsx";
+import { debounce } from "lodash";
 import classes from "./Field.module.scss";
 
 type FieldProps = {
   label: string;
   name: string;
   pattern?: RegExp;
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
 } & Omit<
   InputHTMLAttributes<HTMLInputElement>,
   "pattern" | "name" | "onChange"
@@ -66,8 +66,8 @@ function Field({
       <input
         id={name}
         name={name}
-        value={internalValue}
-        onChange={handleChange}
+        value={onChange || pattern ? internalValue : undefined}
+        onChange={onChange || pattern ? handleChange : undefined}
         className={clsx(classes.input, className)}
         {...props}
       />

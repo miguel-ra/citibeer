@@ -1,9 +1,10 @@
+import CheckboxField from "components/field/CheckboxField";
 import Field from "components/field/Field";
+import { useBeers } from "../beersContext";
 import classes from "./BeersFilters.module.scss";
-import { useFilters } from "./filtersContext";
 
 function BeersFilters() {
-  const { filters, setFilters } = useFilters();
+  const { filters, setFilters } = useBeers();
 
   return (
     <form className={classes.wrapper}>
@@ -33,6 +34,17 @@ function BeersFilters() {
           }
         }}
         value={filters.firstBrewed?.split("-").reverse().join("-")}
+      />
+      <CheckboxField
+        label="Show only favorite beers"
+        name="showFavorites"
+        onChange={(value: boolean) => {
+          setFilters((prevFilters) => ({
+            ...prevFilters,
+            showFavorites: value,
+          }));
+        }}
+        checked={filters.showFavorites}
       />
     </form>
   );

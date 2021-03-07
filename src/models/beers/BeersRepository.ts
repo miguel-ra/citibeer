@@ -1,9 +1,10 @@
 import { Beer } from "./Beer";
 
 export type GetAllParams = {
-  page: number;
-  beerName: string;
-  firstBrewed: string;
+  page?: number;
+  per_page?: number;
+  beerName?: string;
+  firstBrewed?: string;
 };
 
 export interface BeersRepository {

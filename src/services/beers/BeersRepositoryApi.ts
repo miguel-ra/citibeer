@@ -4,7 +4,7 @@ import BeersInvalidData from "models/beers/errors/BeersInvalidData";
 
 const BEER_API_URL = "https://api.punkapi.com/v2";
 
-function getBrewedRange(firstBrewed: string) {
+function getBrewedRange(firstBrewed?: string) {
   if (!firstBrewed) {
     return {};
   }
@@ -30,7 +30,7 @@ function getBrewedRange(firstBrewed: string) {
 }
 
 class BeerRepositoryApi implements BeersRepository {
-  async getAll({ beerName, firstBrewed, ...rest }: GetAllParams) {
+  async getAll({ beerName, firstBrewed, ...rest }: GetAllParams = {}) {
     const serviceParams = {
       beer_name: beerName,
       ...getBrewedRange(firstBrewed),

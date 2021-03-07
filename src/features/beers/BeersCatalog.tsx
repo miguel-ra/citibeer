@@ -1,13 +1,13 @@
 import BeersFilters from "./filters/BeersFilters";
 import BeersData from "./BeersData";
-import { FiltersProvider } from "./filters/filtersContext";
+import { BeersProvider } from "./beersContext";
 
 function BeersCatalog() {
   return (
-    <FiltersProvider>
+    <BeersProvider>
       <BeersFilters />
       <BeersData />
-    </FiltersProvider>
+    </BeersProvider>
   );
 }
 

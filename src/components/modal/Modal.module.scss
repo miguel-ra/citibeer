@@ -27,7 +27,8 @@
   display: flex;
   flex-direction: column;
   justify-content: stretch;
-  @media screen and (min-width: $breakpointSmall) {
+
+  @media screen and (min-width: $breakpointMedium) {
     box-shadow: $boxShadow;
     border-radius: $borderRadius;
     top: 50%;

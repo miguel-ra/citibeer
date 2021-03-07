@@ -1,29 +1,63 @@
 import { Beer } from "models/beers/Beer";
 import { useModal } from "store/modalContext";
 import Button from "components/button/Button";
+import AbvEmoji from "components/emoji/AbvEmoji";
 import barrelSrc from "assets/barrel.svg";
 import classes from "./BeerDetail.module.scss";
+import { useState } from "react";
 
 type BeerDetailProps = {
-  data: Beer;
+  beer: Beer;
+  isFavorite: boolean;
+  addFavorite: (beer: Beer) => void;
+  removeFavorite: (beerId: number) => void;
 };
 
-function BeerDetail({ data }: BeerDetailProps) {
+function BeerDetail({
+  beer,
+  isFavorite: isFavoriteProp,
+  addFavorite,
+  removeFavorite,
+}: BeerDetailProps) {
   const { closeModal } = useModal();
+  const [isFavorite, setIsFavorite] = useState(isFavoriteProp);
+
   return (
     <div className={classes.wrapper}>
       <figure className={classes.figure}>
-        <img src={data.image_url || barrelSrc} alt={data.name} />
-        <figcaption>{/* <AbvEmoji abv={data.abv} /> */}</figcaption>
+        <img src={beer.image_url || barrelSrc} alt={beer.name} />
+        <figcaption>
+          <AbvEmoji abv={beer.abv} />
+        </figcaption>
       </figure>
       <div className={classes.content}>
-        <div className={classes.date}>{data.first_brewed}</div>
-        <h4 className={classes.name}>{data.name}</h4>
+        <div className={classes.date}>{beer.first_brewed}</div>
+        <h4 className={classes.name}>{beer.name}</h4>
         <div className={classes.details}>
-          <p className={classes.tagline}>{data.tagline}</p>
-          <p className={classes.description}>{data.description}</p>
+          <p className={classes.tagline}>{beer.tagline}</p>
+          <p className={classes.description}>{beer.description}</p>
         </div>
         <div className={classes.actions}>
+          {!isFavorite && (
+            <Button
+              onClick={() => {
+                addFavorite(beer);
+                setIsFavorite(true);
+              }}
+            >
+              Agregar
+            </Button>
+          )}
+          {isFavorite && (
+            <Button
+              onClick={() => {
+                removeFavorite(beer.id);
+                setIsFavorite(false);
+              }}
+            >
+              Eliminar
+            </Button>
+          )}
           <Button onClick={() => closeModal()}>Cerrar</Button>
         </div>
       </div>

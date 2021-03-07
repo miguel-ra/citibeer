@@ -8,15 +8,14 @@
   box-shadow: $boxShadow;
   border-radius: $borderRadius;
   padding: 2rem;
-  display: flex;
   margin-top: -6rem;
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 2rem;
-  flex-direction: column;
 
   @media screen and (min-width: $breakpointSmall) {
-    flex-direction: row;
+    grid-template-columns: repeat(2, 1fr);
     margin-top: -3rem;
   }
 }

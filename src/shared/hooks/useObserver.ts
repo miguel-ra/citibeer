@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 
-const defaultOptions = { rootMargin: "200px" };
-
-function useObserver(
-  callback: Function,
-  options: IntersectionObserverInit = defaultOptions
-) {
+function useObserver(callback: Function, options: IntersectionObserverInit) {
   const [element, setElement] = useState<Element | null>(null);
 
   useEffect(() => {

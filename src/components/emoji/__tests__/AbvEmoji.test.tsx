@@ -1,4 +1,4 @@
-import { render, screen } from "../../../../../internals/test";
+import { render, screen } from "../../../../internals/test";
 import AbvEmoji from "../AbvEmoji";
 
 const messages = [

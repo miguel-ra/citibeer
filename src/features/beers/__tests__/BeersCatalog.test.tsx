@@ -1,4 +1,3 @@
-import { mocked } from "ts-jest/utils";
 import {
   renderWithProviders,
   screen,
@@ -7,13 +6,13 @@ import {
 } from "../../../../internals/test";
 import { generateBeers } from "../../../../internals/test/mocks/beers";
 import BeersCatalog from "../BeersCatalog";
-import BeersRepository from "services/beers/BeersRepository";
+import useBeersRepository from "services/beers/useBeersRepository";
 import { Beer } from "models/beers/Beer";
 import BeersInvalidData from "models/beers/errors/BeersInvalidData";
 
-jest.mock("services/beers/BeersRepository");
+jest.mock("services/beers/useBeersRepository");
+const mockedUseBeersRepository = useBeersRepository as jest.Mock;
 
-const mockedBeersRepository = mocked(BeersRepository);
 const beers = generateBeers();
 
 function deferred<T>() {
@@ -28,7 +27,9 @@ function deferred<T>() {
 describe("BeersCatalog", () => {
   test("Should render spinner", async () => {
     const { promise, resolve } = deferred<Beer[]>();
-    mockedBeersRepository.getAll.mockImplementation(() => promise);
+    mockedUseBeersRepository.mockImplementation(() => ({
+      getAll: () => promise,
+    }));
 
     renderWithProviders(<BeersCatalog />);
 
@@ -46,7 +47,9 @@ describe("BeersCatalog", () => {
   });
 
   test("Should show error message if the respository fails", async () => {
-    mockedBeersRepository.getAll.mockRejectedValue(new BeersInvalidData());
+    mockedUseBeersRepository.mockImplementation(() => ({
+      getAll: jest.fn().mockRejectedValue(new BeersInvalidData()),
+    }));
 
     renderWithProviders(<BeersCatalog />);
 
@@ -56,7 +59,9 @@ describe("BeersCatalog", () => {
   });
 
   test("Should show default message if there are not beers to show", async () => {
-    mockedBeersRepository.getAll.mockResolvedValue([]);
+    mockedUseBeersRepository.mockImplementation(() => ({
+      getAll: jest.fn().mockResolvedValue([]),
+    }));
 
     renderWithProviders(<BeersCatalog />);
 
@@ -66,7 +71,9 @@ describe("BeersCatalog", () => {
   });
 
   test("Should render beers", async () => {
-    mockedBeersRepository.getAll.mockResolvedValue(beers);
+    mockedUseBeersRepository.mockImplementation(() => ({
+      getAll: jest.fn().mockResolvedValue(beers),
+    }));
 
     renderWithProviders(<BeersCatalog />);
 

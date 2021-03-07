@@ -34,9 +34,24 @@
     }
   }
 
+  figcaption {
+    position: absolute;
+    left: 1.5rem;
+    top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 5rem;
+    line-height: 5rem;
+    transform: rotate(-10deg);
+  }
+
   @media screen and (min-width: $breakpointSmall) {
     padding: 4rem;
     width: 20rem;
+  }
+
+  @media screen and (min-width: $breakpointMedium) {
     border-top-left-radius: $borderRadius;
     border-bottom-left-radius: $borderRadius;
   }
@@ -61,7 +76,6 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  max-height: 40vh;
   overflow-y: auto;
 
   background: linear-gradient(#ffffff 30%, rgba(100, 100, 100, 0)),
@@ -81,6 +95,10 @@
   background-repeat: no-repeat;
   background-attachment: local, local, scroll, scroll;
   background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+
+  @media screen and (min-width: $breakpointMedium) {
+    max-height: 40vh;
+  }
 }
 
 .date {
@@ -115,12 +133,16 @@
 }
 
 .actions {
-  text-align: right;
+  display: flex;
+  gap: 2rem;
   border-top: 2px solid $turquoise;
   padding-top: 2rem;
+  flex-direction: column;
 
   @media screen and (min-width: $breakpointSmall) {
     width: 100%;
     padding: 2rem 0;
+    justify-content: space-between;
+    flex-direction: row;
   }
 }

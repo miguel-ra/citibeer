@@ -4,7 +4,7 @@
 
 .wrapper {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   width: 100%;
   flex-direction: column;
   justify-content: stretch;
@@ -23,6 +23,7 @@
 .input {
   flex: 1;
   padding: 0.5rem;
+  min-height: 3.3rem;
   width: auto;
   border: 1px solid $gray;
   border-radius: $borderRadius/2;

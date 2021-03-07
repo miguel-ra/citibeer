@@ -1,19 +1,26 @@
+import { useCallback, useEffect, useState } from "react";
 import { useInfiniteQuery } from "react-query";
-import BeersRepository from "services/beers/BeersRepository";
+import { Beer } from "models/beers/Beer";
+import useBeersRepository from "services/beers/useBeersRepository";
 import useObserver from "shared/hooks/useObserver";
+import { useModal } from "store/modalContext";
 import Spinner from "components/spinner/Spinner";
 import BeersList from "./list/BeersList";
-import { useFilters } from "./filters/filtersContext";
-import { useModal } from "store/modalContext";
-import { useCallback } from "react";
-import { Beer } from "models/beers/Beer";
 import BeerDetail from "./detail/BeerDetail";
+import { useBeers } from "./beersContext";
 
-const observerOptions = { rootMargin: "300px" };
-const pageSize = 25;
+const observerOptions = { root: null, rootMargin: "300px", threshold: 0 };
+const pageSize = 24;
 
 function BeersData() {
-  const { filters } = useFilters();
+  const [beers, setBeers] = useState<Beer[]>([]);
+  const {
+    favoriteIds,
+    addFavorite,
+    removeFavorite,
+    filters: { showFavorites, ...filters },
+  } = useBeers();
+  const beerRepositroy = useBeersRepository({ showFavorites });
   const { openModal } = useModal();
   const {
     data,
@@ -22,9 +29,9 @@ function BeersData() {
     hasNextPage,
     fetchNextPage,
   } = useInfiniteQuery(
-    ["beers", JSON.stringify(filters)],
-    ({ pageParam = { page: 1 } }) => {
-      return BeersRepository.getAll({ ...pageParam, ...filters });
+    ["beers", JSON.stringify(filters), favoriteIds.length, beerRepositroy],
+    ({ pageParam = { per_page: pageSize, page: 1 } }) => {
+      return beerRepositroy.getAll({ ...pageParam, ...filters });
     },
     {
       getNextPageParam: (lastPage, pages) => {
@@ -32,7 +39,7 @@ function BeersData() {
         if (lastPageIsEmpty) {
           return undefined;
         }
-        return { pageSize, page: pages.length + 1 };
+        return { per_page: pageSize, page: pages.length + 1 };
       },
     }
   );
@@ -40,15 +47,28 @@ function BeersData() {
 
   const handleBeerDetail = useCallback(
     (beer: Beer) => {
-      openModal(<BeerDetail data={beer} />);
+      openModal(
+        <BeerDetail
+          beer={beer}
+          isFavorite={favoriteIds.includes(beer.id)}
+          addFavorite={addFavorite}
+          removeFavorite={removeFavorite}
+        />
+      );
     },
-    [openModal]
+    [addFavorite, favoriteIds, openModal, removeFavorite]
   );
 
   const lastPage = data?.pages[data.pages.length - 1];
-  const beers = data?.pages ? data.pages.flat() : [];
 
-  if (isLoading) {
+  useEffect(() => {
+    if (!isLoading) {
+      const newBeers = data?.pages ? data.pages.flat() : [];
+      setBeers(newBeers);
+    }
+  }, [data, isLoading]);
+
+  if (isLoading && !beers.length) {
     return <Spinner />;
   }
 

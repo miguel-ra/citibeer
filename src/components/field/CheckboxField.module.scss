@@ -1,0 +1,24 @@
+@import "styles/colors";
+@import "styles/shapes";
+@import "styles/breakpoints";
+
+.wrapper {
+  display: flex;
+  gap: 1.5rem;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+
+  @media screen and (min-width: $breakpointSmall) {
+  }
+}
+
+.label {
+  font-size: 1.8rem;
+  font-weight: 400;
+  flex: 1;
+}
+
+.input {
+  transform: scale(1.2);
+}

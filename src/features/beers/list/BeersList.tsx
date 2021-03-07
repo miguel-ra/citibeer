@@ -1,6 +1,6 @@
 import { Beer } from "models/beers/Beer";
 import barrelSrc from "assets/barrel.svg";
-import AbvEmoji from "./AbvEmoji";
+import AbvEmoji from "components/emoji/AbvEmoji";
 import classes from "./BeersList.module.scss";
 
 type BeersListProps = {

@@ -1,25 +1,20 @@
 import userEvent from "@testing-library/user-event";
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from "../../../../../internals/test";
+import { render, screen, waitFor } from "../../../../../internals/test";
 import BeersFilters from "../BeersFilters";
-import { FiltersProvider, useFilters } from "../filtersContext";
+import { BeersProvider, useBeers } from "../../beersContext";
 
-jest.mock("../filtersContext", () => {
-  const actualFiltersContext = jest.requireActual("../filtersContext");
+jest.mock("../../beersContext", () => {
+  const actualBeersContext = jest.requireActual("../../beersContext");
   return {
-    ...actualFiltersContext,
-    useFilters: jest.fn(),
+    ...actualBeersContext,
+    useBeers: jest.fn(),
   };
 });
-const mockedUseFilters = useFilters as jest.Mock;
+const mockedUseBeers = useBeers as jest.Mock;
 
 describe("BeersFilters", () => {
   beforeEach(() => {
-    mockedUseFilters.mockImplementation(() => ({
+    mockedUseBeers.mockImplementation(() => ({
       filters: {},
       setFilters: jest.fn(),
     }));
@@ -30,9 +25,9 @@ describe("BeersFilters", () => {
 
   test("Should render fields", () => {
     render(
-      <FiltersProvider>
+      <BeersProvider>
         <BeersFilters />
-      </FiltersProvider>
+      </BeersProvider>
     );
 
     expect(
@@ -46,14 +41,14 @@ describe("BeersFilters", () => {
 
   test("Should update beerName", async () => {
     const setFilters = jest.fn();
-    mockedUseFilters.mockImplementation(() => ({
+    mockedUseBeers.mockImplementation(() => ({
       filters: {},
       setFilters,
     }));
     render(
-      <FiltersProvider>
+      <BeersProvider>
         <BeersFilters />
-      </FiltersProvider>
+      </BeersProvider>
     );
 
     const input = screen.getByRole("textbox", {
@@ -71,14 +66,14 @@ describe("BeersFilters", () => {
 
   test("Should update firstBrewed", async () => {
     const setFilters = jest.fn();
-    mockedUseFilters.mockImplementation(() => ({
+    mockedUseBeers.mockImplementation(() => ({
       filters: {},
       setFilters,
     }));
     render(
-      <FiltersProvider>
+      <BeersProvider>
         <BeersFilters />
-      </FiltersProvider>
+      </BeersProvider>
     );
 
     const input = screen.getByLabelText(/first brewed/i);
