@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useBeersRepository } from "services/beers/beersRepository";
+import { useBeersRepository } from "repositories/beers/beersRepository";
 import { GetAllParams } from "models/beers/BeersRepository";
 import { Beer } from "models/beers/Beer";
 import barrelSrc from "assets/barrel.svg";

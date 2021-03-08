@@ -8,7 +8,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import BeersRepositoryInMemory from "services/beers/BeersRepositoryInMemory";
+import BeersRepositoryInMemory from "repositories/beers/BeersRepositoryInMemory";
 import { BeerView, beerViewToBeer } from "./beerViewModel";
 
 const beersRepositoryInMemory = new BeersRepositoryInMemory();

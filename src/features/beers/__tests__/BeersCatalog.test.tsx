@@ -6,11 +6,11 @@ import {
 } from "../../../../internals/test";
 import { generateBeers } from "../../../../internals/test/mocks/beers";
 import BeersCatalog from "../BeersCatalog";
-import { useBeersRepository } from "services/beers/beersRepository";
+import { useBeersRepository } from "repositories/beers/beersRepository";
 import { Beer } from "models/beers/Beer";
 import BeersInvalidData from "models/beers/errors/BeersInvalidData";
 
-jest.mock("services/beers/beersRepository");
+jest.mock("repositories/beers/beersRepository");
 const mockedUseBeersRepository = useBeersRepository as jest.Mock;
 
 const beers = generateBeers();
