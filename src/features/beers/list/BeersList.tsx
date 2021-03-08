@@ -14,7 +14,7 @@ function BeersList({ data, onShowDetails }: BeersListProps) {
     <section className={classes.container}>
       {data?.map((beer) => (
         <article
-          id={`beer-${beer.id}`}
+          data-testid={`beer-${beer.id}`}
           key={beer.id}
           className={classes.beer}
           tabIndex={0}

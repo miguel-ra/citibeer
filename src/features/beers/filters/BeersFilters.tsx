@@ -5,7 +5,7 @@ import { useBeers } from "../beersContext";
 import classes from "./BeersFilters.module.scss";
 
 function BeersFilters() {
-  const { filters, setFilters } = useBeers();
+  const { options, setOptions } = useBeers();
 
   return (
     <form className={classes.wrapper}>
@@ -14,12 +14,12 @@ function BeersFilters() {
           label="Name"
           name="beerName"
           onChange={(value: string) => {
-            setFilters((prevFilters) => ({
-              ...prevFilters,
+            setOptions((prevOptions) => ({
+              ...prevOptions,
               beerName: value,
             }));
           }}
-          value={filters.beerName}
+          value={options.beerName}
         />
         <Field
           label="First brewed"
@@ -29,13 +29,13 @@ function BeersFilters() {
           pattern={/^(\d{0,4}(-(0[1-9]{0,1}|1[0-2]{0,1})?)?)?$/}
           onChange={(value: string) => {
             if (!value || value.length === 4 || value.includes("-")) {
-              setFilters((prevFilters) => ({
-                ...prevFilters,
+              setOptions((prevOptions) => ({
+                ...prevOptions,
                 firstBrewed: value.split("-").reverse().join("-"),
               }));
             }
           }}
-          value={filters.firstBrewed?.split("-").reverse().join("-")}
+          value={options.firstBrewed?.split("-").reverse().join("-")}
         />
       </div>
       <div className={classes.rowReverse}>
@@ -43,23 +43,23 @@ function BeersFilters() {
           label="Show only saved beers"
           name="showSaved"
           onChange={(value: boolean) => {
-            setFilters((prevFilters) => ({
-              ...prevFilters,
+            setOptions((prevOptions) => ({
+              ...prevOptions,
               showSaved: value,
             }));
           }}
-          checked={filters.showSaved}
+          checked={options.showSaved}
         />
         <SelectField
           label="View"
           name="viewMode"
           onChange={(value: string) => {
-            setFilters((prevFilters) => ({
-              ...prevFilters,
+            setOptions((prevOptions) => ({
+              ...prevOptions,
               viewMode: value === "grid" ? "grid" : "list",
             }));
           }}
-          value={filters.viewMode}
+          value={options.viewMode}
         >
           <option value="list">List</option>
           <option value="grid">Grid</option>

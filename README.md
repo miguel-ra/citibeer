@@ -41,6 +41,6 @@ npm test
 npm build
 ```
 
-## Decisions justification
+## Decisions
 
 ...

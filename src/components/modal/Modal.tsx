@@ -67,7 +67,7 @@ function Modal({ containerId, closeModal, children }: ModalProps) {
   return (
     <Portal containerId={containerId}>
       <div
-        id="overlay"
+        data-testid="overlay"
         className={classes.overlay}
         onClick={() => closeModal()}
       />

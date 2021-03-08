@@ -1,7 +1,7 @@
 import userEvent from "@testing-library/user-event";
 import { beerToBeerView } from "features/beers/beerViewModel";
 import { useModal } from "store/modalContext";
-import { render, screen } from "../../../../../internals/test";
+import { render, screen, within } from "../../../../../internals/test";
 import { generateBeer } from "../../../../../internals/test/mocks/beers";
 import BeerDetail from "../BeerDetail";
 
@@ -42,19 +42,28 @@ describe("BeerDetail", () => {
 
     expect(screen.getByText(beer.description)).toBeInTheDocument();
 
+    const maltContainer = screen.getByTestId("malt");
     expect(screen.getByText(/malt:/i)).toBeInTheDocument();
     beer.malt.forEach((item) => {
-      expect(screen.getByText(new RegExp(item, "i"))).toBeInTheDocument();
+      expect(
+        within(maltContainer).getByText(new RegExp(item, "i"))
+      ).toBeInTheDocument();
     });
 
+    const hopsContainer = screen.getByTestId("hops");
     expect(screen.getByText(/hops:/i)).toBeInTheDocument();
     beer.hops.forEach((item) => {
-      expect(screen.getByText(new RegExp(item, "i"))).toBeInTheDocument();
+      expect(
+        within(hopsContainer).getByText(new RegExp(item, "i"))
+      ).toBeInTheDocument();
     });
 
+    const foodContainer = screen.getByTestId("food");
     expect(screen.getByText(/food pairing:/i)).toBeInTheDocument();
     beer.foodPairing.forEach((item) => {
-      expect(screen.getByText(new RegExp(item, "i"))).toBeInTheDocument();
+      expect(
+        within(foodContainer).getByText(new RegExp(item, "i"))
+      ).toBeInTheDocument();
     });
 
     expect(

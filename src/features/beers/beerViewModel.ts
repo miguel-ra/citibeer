@@ -62,7 +62,7 @@ function beerToBeerView({
     ...beer,
     ...parseDate(first_brewed),
     imageUrl: image_url || barrelSrc,
-    foodPairing: food_pairing,
+    foodPairing: food_pairing.map((food) => food.replace(/\./g, " ")),
     malt: ingredients.malt.map(({ name }) => name),
     hops: ingredients.hops.map(({ name }) => name),
     yeast: yeast?.replace(/[^\w\s]/gi, ""),

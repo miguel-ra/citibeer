@@ -17,7 +17,7 @@ type BeersProviderProps = {
   children: ReactNode;
 };
 
-type Filters = {
+type Options = {
   beerName?: string;
   firstBrewed?: string;
   showSaved?: boolean;
@@ -25,18 +25,18 @@ type Filters = {
 };
 
 type BeersContextValue = {
-  filters: Filters;
-  setFilters: Dispatch<SetStateAction<Filters>>;
+  options: Options;
+  setOptions: Dispatch<SetStateAction<Options>>;
   savedIds: number[];
   saveBeer: (beer: BeerView) => void;
   removeBeer: (beerId: number) => void;
 };
 
 const initialValue = {
-  filters: {
+  options: {
     viewMode: "list" as const,
   },
-  setFilters: () => {},
+  setOptions: () => {},
   savedIds: [],
   saveBeer: () => {},
   removeBeer: () => {},
@@ -54,7 +54,7 @@ function useBeers() {
 }
 
 function BeersProvider({ children }: BeersProviderProps) {
-  const [filters, setFilters] = useState<Filters>(initialValue.filters);
+  const [options, setOptions] = useState<Options>(initialValue.options);
   const [savedIds, setSavedIds] = useState<number[]>(initialValue.savedIds);
 
   useEffect(() => {
@@ -81,8 +81,8 @@ function BeersProvider({ children }: BeersProviderProps) {
   return (
     <BeersContext.Provider
       value={{
-        filters,
-        setFilters,
+        options,
+        setOptions,
         savedIds,
         saveBeer,
         removeBeer,

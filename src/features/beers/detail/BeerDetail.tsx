@@ -41,13 +41,13 @@ function BeerDetail({
         <div className={classes.details}>
           <p className={classes.tagline}>{beer.tagline}</p>
           <p className={classes.description}>{beer.description}</p>
-          <div className={classes.ingredients}>
+          <div data-testid="malt" className={classes.ingredients}>
             <strong>Malt:</strong> {beer.malt.join(" • ")}
           </div>
-          <div className={classes.ingredients}>
+          <div data-testid="hops" className={classes.ingredients}>
             <strong>Hops:</strong> {beer.hops.join(" • ")}
           </div>
-          <div className={classes.ingredients}>
+          <div data-testid="food" className={classes.ingredients}>
             <strong>Food pairing:</strong> {beer.foodPairing.join(" • ")}
           </div>
         </div>

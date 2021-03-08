@@ -15,8 +15,8 @@ const mockedUseBeers = useBeers as jest.Mock;
 describe("BeersFilters", () => {
   beforeEach(() => {
     mockedUseBeers.mockImplementation(() => ({
-      filters: {},
-      setFilters: jest.fn(),
+      options: {},
+      setOptions: jest.fn(),
     }));
   });
   afterEach(() => {
@@ -56,10 +56,10 @@ describe("BeersFilters", () => {
   });
 
   test("Should update beerName", async () => {
-    const setFilters = jest.fn();
+    const setOptions = jest.fn();
     mockedUseBeers.mockImplementation(() => ({
-      filters: {},
-      setFilters,
+      options: {},
+      setOptions,
     }));
     render(
       <BeersProvider>
@@ -73,18 +73,18 @@ describe("BeersFilters", () => {
 
     userEvent.type(input, "name");
 
-    await waitFor(() => expect(setFilters).toHaveBeenCalled());
+    await waitFor(() => expect(setOptions).toHaveBeenCalled());
 
-    const updateFilter = setFilters.mock.calls[0][0] as Function;
+    const updateFilter = setOptions.mock.calls[0][0] as Function;
 
     expect(updateFilter()).toStrictEqual({ beerName: "name" });
   });
 
   test("Should update firstBrewed", async () => {
-    const setFilters = jest.fn();
+    const setOptions = jest.fn();
     mockedUseBeers.mockImplementation(() => ({
-      filters: {},
-      setFilters,
+      options: {},
+      setOptions,
     }));
     render(
       <BeersProvider>
@@ -98,22 +98,22 @@ describe("BeersFilters", () => {
 
     userEvent.type(input, "200");
 
-    await waitFor(() => expect(setFilters).not.toHaveBeenCalled());
+    await waitFor(() => expect(setOptions).not.toHaveBeenCalled());
 
     userEvent.type(input, "0");
 
-    await waitFor(() => expect(setFilters).toHaveBeenCalled());
+    await waitFor(() => expect(setOptions).toHaveBeenCalled());
 
-    const updateFilter = setFilters.mock.calls[0][0] as Function;
+    const updateFilter = setOptions.mock.calls[0][0] as Function;
 
     expect(updateFilter()).toStrictEqual({ firstBrewed: "2000" });
   });
 
   test("Should update showSaved", async () => {
-    const setFilters = jest.fn();
+    const setOptions = jest.fn();
     mockedUseBeers.mockImplementation(() => ({
-      filters: {},
-      setFilters,
+      options: {},
+      setOptions,
     }));
     render(
       <BeersProvider>
@@ -127,18 +127,18 @@ describe("BeersFilters", () => {
 
     userEvent.click(checkbox);
 
-    await waitFor(() => expect(setFilters).toHaveBeenCalled());
+    await waitFor(() => expect(setOptions).toHaveBeenCalled());
 
-    const updateFilter = setFilters.mock.calls[0][0] as Function;
+    const updateFilter = setOptions.mock.calls[0][0] as Function;
 
     expect(updateFilter()).toStrictEqual({ showSaved: true });
   });
 
   test("Should update viewMode", async () => {
-    const setFilters = jest.fn();
+    const setOptions = jest.fn();
     mockedUseBeers.mockImplementation(() => ({
-      filters: {},
-      setFilters,
+      options: {},
+      setOptions,
     }));
     render(
       <BeersProvider>
@@ -152,9 +152,9 @@ describe("BeersFilters", () => {
 
     userEvent.selectOptions(combobox, ["grid"]);
 
-    await waitFor(() => expect(setFilters).toHaveBeenCalled());
+    await waitFor(() => expect(setOptions).toHaveBeenCalled());
 
-    const updateFilter = setFilters.mock.calls[0][0] as Function;
+    const updateFilter = setOptions.mock.calls[0][0] as Function;
 
     expect(updateFilter()).toStrictEqual({ viewMode: "grid" });
   });

@@ -19,7 +19,7 @@ function BeersData() {
     savedIds,
     saveBeer,
     removeBeer,
-    filters: { showSaved, viewMode, ...filters },
+    options: { showSaved, viewMode, ...filters },
   } = useBeers();
   const { getAll, beerRepositroy } = useBeerView({ showSaved });
   const { openModal } = useModal();
