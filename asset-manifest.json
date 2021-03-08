@@ -1,29 +1,29 @@
 {
   "files": {
-    "main.css": "/citibeer/static/css/main.06885e22.chunk.css",
-    "main.js": "/citibeer/static/js/main.f37d1a6d.chunk.js",
-    "main.js.map": "/citibeer/static/js/main.f37d1a6d.chunk.js.map",
-    "runtime-main.js": "/citibeer/static/js/runtime-main.baa80a89.js",
-    "runtime-main.js.map": "/citibeer/static/js/runtime-main.baa80a89.js.map",
-    "static/js/2.3ea73fdf.chunk.js": "/citibeer/static/js/2.3ea73fdf.chunk.js",
-    "static/js/2.3ea73fdf.chunk.js.map": "/citibeer/static/js/2.3ea73fdf.chunk.js.map",
+    "main.css": "/citibeer/static/css/main.17399a59.chunk.css",
+    "main.js": "/citibeer/static/js/main.63fcbc20.chunk.js",
+    "main.js.map": "/citibeer/static/js/main.63fcbc20.chunk.js.map",
+    "runtime-main.js": "/citibeer/static/js/runtime-main.72288847.js",
+    "runtime-main.js.map": "/citibeer/static/js/runtime-main.72288847.js.map",
+    "static/js/2.184b08b2.chunk.js": "/citibeer/static/js/2.184b08b2.chunk.js",
+    "static/js/2.184b08b2.chunk.js.map": "/citibeer/static/js/2.184b08b2.chunk.js.map",
     "static/css/3.a5c0aeee.chunk.css": "/citibeer/static/css/3.a5c0aeee.chunk.css",
-    "static/js/3.ad8877a2.chunk.js": "/citibeer/static/js/3.ad8877a2.chunk.js",
-    "static/js/3.ad8877a2.chunk.js.map": "/citibeer/static/js/3.ad8877a2.chunk.js.map",
-    "static/js/4.9ab2bfb9.chunk.js": "/citibeer/static/js/4.9ab2bfb9.chunk.js",
-    "static/js/4.9ab2bfb9.chunk.js.map": "/citibeer/static/js/4.9ab2bfb9.chunk.js.map",
+    "static/js/3.d6a6f4e8.chunk.js": "/citibeer/static/js/3.d6a6f4e8.chunk.js",
+    "static/js/3.d6a6f4e8.chunk.js.map": "/citibeer/static/js/3.d6a6f4e8.chunk.js.map",
+    "static/js/4.52df7681.chunk.js": "/citibeer/static/js/4.52df7681.chunk.js",
+    "static/js/4.52df7681.chunk.js.map": "/citibeer/static/js/4.52df7681.chunk.js.map",
     "index.html": "/citibeer/index.html",
     "static/css/3.a5c0aeee.chunk.css.map": "/citibeer/static/css/3.a5c0aeee.chunk.css.map",
-    "static/css/main.06885e22.chunk.css.map": "/citibeer/static/css/main.06885e22.chunk.css.map",
-    "static/js/2.3ea73fdf.chunk.js.LICENSE.txt": "/citibeer/static/js/2.3ea73fdf.chunk.js.LICENSE.txt",
+    "static/css/main.17399a59.chunk.css.map": "/citibeer/static/css/main.17399a59.chunk.css.map",
+    "static/js/2.184b08b2.chunk.js.LICENSE.txt": "/citibeer/static/js/2.184b08b2.chunk.js.LICENSE.txt",
     "static/media/global.scss": "/citibeer/static/media/QuicksandCitibox.fd1ef21c.eot",
     "static/media/barrel.0dcab2ca.svg": "/citibeer/static/media/barrel.0dcab2ca.svg",
     "static/media/spinner.9444fa5b.svg": "/citibeer/static/media/spinner.9444fa5b.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.baa80a89.js",
-    "static/js/2.3ea73fdf.chunk.js",
-    "static/css/main.06885e22.chunk.css",
-    "static/js/main.f37d1a6d.chunk.js"
+    "static/js/runtime-main.72288847.js",
+    "static/js/2.184b08b2.chunk.js",
+    "static/css/main.17399a59.chunk.css",
+    "static/js/main.63fcbc20.chunk.js"
   ]
 }
