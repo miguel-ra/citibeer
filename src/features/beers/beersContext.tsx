@@ -1,4 +1,3 @@
-import { Beer } from "models/beers/Beer";
 import {
   createContext,
   Dispatch,
@@ -9,7 +8,10 @@ import {
   useEffect,
   useState,
 } from "react";
+import omit from "lodash/omit";
 import BeersRepositoryInMemory from "services/beers/BeersRepositoryInMemory";
+import { Beer } from "models/beers/Beer";
+import { BeerView } from "./beerViewModel";
 
 const beersRepositoryInMemory = new BeersRepositoryInMemory();
 
@@ -27,7 +29,7 @@ type BeersContextValue = {
   filters: Filters;
   setFilters: Dispatch<SetStateAction<Filters>>;
   favoriteIds: number[];
-  addFavorite: (beer: Beer) => void;
+  addFavorite: (beer: BeerView) => void;
   removeFavorite: (beerId: number) => void;
 };
 
@@ -65,7 +67,21 @@ function BeersProvider({ children }: BeersProviderProps) {
     });
   }, []);
 
-  const addFavorite = useCallback((beer: Beer) => {
+  const addFavorite = useCallback((beerView: BeerView) => {
+    const beer: Beer = {
+      ...omit(beerView, [
+        "imageUrl",
+        "firstBrewedLabel",
+        "firstBrewedMonth",
+        "firstBrewedYear",
+        "foodPairing",
+      ]),
+      image_url: beerView.imageUrl,
+      first_brewed: [beerView.firstBrewedMonth, beerView.firstBrewedYear]
+        .filter(Boolean)
+        .join("/"),
+      food_pairing: beerView.foodPairing,
+    };
     beersRepositoryInMemory
       .add(beer)
       .then((newFavorites) =>

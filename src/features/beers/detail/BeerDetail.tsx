@@ -1,15 +1,14 @@
-import { Beer } from "models/beers/Beer";
+import { useState } from "react";
 import { useModal } from "store/modalContext";
 import Button from "components/button/Button";
 import AbvEmoji from "components/emoji/AbvEmoji";
-import barrelSrc from "assets/barrel.svg";
 import classes from "./BeerDetail.module.scss";
-import { useState } from "react";
+import { BeerView } from "../beerViewModel";
 
 type BeerDetailProps = {
-  beer: Beer;
+  beer: BeerView;
   isFavorite: boolean;
-  addFavorite: (beer: Beer) => void;
+  addFavorite: (beer: BeerView) => void;
   removeFavorite: (beerId: number) => void;
 };
 
@@ -25,13 +24,13 @@ function BeerDetail({
   return (
     <div className={classes.wrapper}>
       <figure className={classes.figure}>
-        <img src={beer.image_url || barrelSrc} alt={beer.name} />
+        <img src={beer.imageUrl} alt={beer.name} />
         <figcaption>
           <AbvEmoji abv={beer.abv} />
         </figcaption>
       </figure>
       <div className={classes.content}>
-        <div className={classes.date}>{beer.first_brewed}</div>
+        <div className={classes.date}>{beer.firstBrewedLabel}</div>
         <h4 className={classes.name}>{beer.name}</h4>
         <div className={classes.details}>
           <p className={classes.tagline}>{beer.tagline}</p>

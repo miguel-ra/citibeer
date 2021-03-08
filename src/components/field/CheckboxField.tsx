@@ -28,7 +28,9 @@ function CheckboxField({
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const { checked } = event.target;
     setInternalValue(checked);
-    onChange?.(checked);
+    window.requestAnimationFrame(() => {
+      onChange?.(checked);
+    });
   }
 
   return (
@@ -37,7 +39,7 @@ function CheckboxField({
         id={name}
         name={name}
         type="checkbox"
-        checked={onChange ? internalValue : undefined}
+        checked={onChange ? internalValue : false}
         onChange={onChange ? handleChange : undefined}
         className={clsx(classes.input, className)}
         {...props}

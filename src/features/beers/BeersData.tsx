@@ -1,19 +1,19 @@
 import { useCallback, useEffect, useState } from "react";
 import { useInfiniteQuery } from "react-query";
-import { Beer } from "models/beers/Beer";
 import useBeersRepository from "services/beers/useBeersRepository";
 import useObserver from "shared/hooks/useObserver";
 import { useModal } from "store/modalContext";
 import Spinner from "components/spinner/Spinner";
-import BeersList from "./list/BeersList";
+import beersViewModel, { BeerView } from "./beerViewModel";
 import BeerDetail from "./detail/BeerDetail";
+import BeersList from "./list/BeersList";
 import { useBeers } from "./beersContext";
 
 const observerOptions = { root: null, rootMargin: "300px", threshold: 0 };
 const pageSize = 24;
 
 function BeersData() {
-  const [beers, setBeers] = useState<Beer[]>([]);
+  const [beers, setBeers] = useState<BeerView[]>([]);
   const {
     favoriteIds,
     addFavorite,
@@ -29,7 +29,12 @@ function BeersData() {
     hasNextPage,
     fetchNextPage,
   } = useInfiniteQuery(
-    ["beers", JSON.stringify(filters), favoriteIds.length, beerRepositroy],
+    [
+      "beers",
+      JSON.stringify(filters),
+      showFavorites ? favoriteIds.length : 0,
+      beerRepositroy,
+    ],
     ({ pageParam = { per_page: pageSize, page: 1 } }) => {
       return beerRepositroy.getAll({ ...pageParam, ...filters });
     },
@@ -46,7 +51,7 @@ function BeersData() {
   const { ref: loadMoreRef } = useObserver(fetchNextPage, observerOptions);
 
   const handleBeerDetail = useCallback(
-    (beer: Beer) => {
+    (beer: BeerView) => {
       openModal(
         <BeerDetail
           beer={beer}
@@ -64,7 +69,7 @@ function BeersData() {
   useEffect(() => {
     if (!isLoading) {
       const newBeers = data?.pages ? data.pages.flat() : [];
-      setBeers(newBeers);
+      setBeers(newBeers.map(beersViewModel));
     }
   }, [data, isLoading]);
 

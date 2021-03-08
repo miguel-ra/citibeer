@@ -37,6 +37,12 @@ describe("BeersFilters", () => {
     ).toBeInTheDocument();
 
     expect(screen.getByLabelText(/first brewed/i)).toBeInTheDocument();
+
+    expect(
+      screen.getByRole("checkbox", {
+        name: /show only favorite beers/i,
+      })
+    ).toBeInTheDocument();
   });
 
   test("Should update beerName", async () => {
@@ -91,5 +97,28 @@ describe("BeersFilters", () => {
     const updateFilter = setFilters.mock.calls[0][0] as Function;
 
     expect(updateFilter()).toStrictEqual({ firstBrewed: "2000" });
+  });
+
+  test("Should update showFavorites", async () => {
+    const setFilters = jest.fn();
+    mockedUseBeers.mockImplementation(() => ({
+      filters: {},
+      setFilters,
+    }));
+    render(
+      <BeersProvider>
+        <BeersFilters />
+      </BeersProvider>
+    );
+
+    const checkbox = screen.getByRole("checkbox", {
+      name: /show only favorite beers/i,
+    });
+
+    userEvent.click(checkbox);
+
+    const updateFilter = setFilters.mock.calls[0][0] as Function;
+
+    expect(updateFilter()).toStrictEqual({ showFavorites: true });
   });
 });

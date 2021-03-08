@@ -1,21 +1,11 @@
-import { Beer } from "models/beers/Beer";
-import barrelSrc from "assets/barrel.svg";
 import AbvEmoji from "components/emoji/AbvEmoji";
 import classes from "./BeersList.module.scss";
+import { BeerView } from "../beerViewModel";
 
 type BeersListProps = {
-  data: Beer[];
-  onShowDetails: (beer: Beer) => void;
+  data: BeerView[];
+  onShowDetails: (beer: BeerView) => void;
 };
-
-function parseDate(dateString: string) {
-  if (!dateString.includes("/")) {
-    return dateString;
-  }
-  const [month, year] = dateString.split("/").map(Number);
-  const date = new Date(year, month - 1);
-  return date.toLocaleString("en-GB", { month: "long", year: "numeric" });
-}
 
 function BeersList({ data, onShowDetails }: BeersListProps) {
   return (
@@ -31,13 +21,13 @@ function BeersList({ data, onShowDetails }: BeersListProps) {
           }}
         >
           <figure className={classes.figure}>
-            <img src={beer.image_url || barrelSrc} alt={beer.name} />
+            <img src={beer.imageUrl} alt={beer.name} />
             <figcaption>
               <AbvEmoji abv={beer.abv} />
             </figcaption>
           </figure>
           <div className={classes.details}>
-            <div className={classes.date}>{parseDate(beer.first_brewed)}</div>
+            <div className={classes.date}>{beer.firstBrewedLabel}</div>
             <h4 className={classes.name}>{beer.name}</h4>
             <p className={classes.tagline}>{beer.tagline}</p>
           </div>

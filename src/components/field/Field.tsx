@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import clsx from "clsx";
-import { debounce } from "lodash";
+import debounce from "lodash/debounce";
 import classes from "./Field.module.scss";
 
 type FieldProps = {
