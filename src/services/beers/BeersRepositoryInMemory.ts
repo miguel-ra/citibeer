@@ -21,7 +21,6 @@ function compareDates(
   dateString: string,
   dateToMatch: { month?: number; year: number }
 ) {
-  console.log("comparing", dateString, dateToMatch);
   if (!dateString.includes("/") && !dateToMatch.month) {
     return dateString === dateToMatch.year.toString();
   }

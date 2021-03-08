@@ -17,7 +17,7 @@ export type BeerView = {
   foodPairing: string[];
   malt: string[];
   hops: string[];
-  yeast: string;
+  yeast?: string;
 };
 
 type UseBeerViewOptions = {
@@ -55,7 +55,7 @@ function beerToBeerView({
   ingredients,
   ...beer
 }: Beer): BeerView {
-  const yest = ingredients.yeast.includes("-")
+  const yeast = ingredients.yeast?.includes("-")
     ? ingredients.yeast.split("-")[1].trim()
     : ingredients.yeast;
   return {
@@ -65,7 +65,7 @@ function beerToBeerView({
     foodPairing: food_pairing,
     malt: ingredients.malt.map(({ name }) => name),
     hops: ingredients.hops.map(({ name }) => name),
-    yeast: yest.replace(/[^\w\s]/gi, ""),
+    yeast: yeast?.replace(/[^\w\s]/gi, ""),
   };
 }
 

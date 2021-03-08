@@ -116,7 +116,6 @@
 .name {
   font-size: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 2px solid $turquoise;
 
   @media screen and (min-width: $breakpointMedium) {
     font-size: 2.8rem;
@@ -127,13 +126,38 @@
   }
 }
 
+.yeast {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  color: $turquoise;
+  border-bottom: 2px solid $turquoise;
+  padding-bottom: 1rem;
+
+  @media screen and (min-width: $breakpointMedium) {
+    font-size: 1.6rem;
+  }
+
+  @media screen and (min-width: $breakpointLarge) {
+    font-size: 1.8rem;
+  }
+}
+
 .tagline {
   margin-bottom: 0;
   font-weight: bold;
 }
 
 .description {
-  font-size: 1.4rem;
+  font-weight: lighter;
+}
+
+.ingredients {
+  font-weight: lighter;
+  margin-bottom: 2rem;
+  strong {
+    display: block;
+    margin-bottom: 1rem;
+  }
 }
 
 .actions {

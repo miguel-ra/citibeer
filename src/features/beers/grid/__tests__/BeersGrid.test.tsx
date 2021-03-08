@@ -3,12 +3,12 @@ import { beerToBeerView } from "features/beers/beerViewModel";
 import { fireEvent, render, screen } from "../../../../../internals/test";
 import { generateBeer } from "../../../../../internals/test/mocks/beers";
 import { useBeers } from "../../beersContext";
-import BeersList from "../BeersList";
+import BeersGrid from "../BeersGrid";
 
 jest.mock("../../beersContext");
 const mockedUseBeers = useBeers as jest.Mock;
 
-describe("BeersList", () => {
+describe("BeersGrid", () => {
   beforeEach(() => {
     mockedUseBeers.mockImplementation(() => ({ savedIds: [] }));
   });
@@ -16,7 +16,7 @@ describe("BeersList", () => {
   test("Should render beer card", () => {
     const beer = beerToBeerView(generateBeer());
     const abv = 0;
-    render(<BeersList onShowDetails={jest.fn()} data={[{ ...beer, abv }]} />);
+    render(<BeersGrid onShowDetails={jest.fn()} data={[{ ...beer, abv }]} />);
 
     expect(screen.getByRole("img", { name: beer.name })).toBeInTheDocument();
     expect(
@@ -25,19 +25,17 @@ describe("BeersList", () => {
     expect(
       screen.getByRole("heading", { name: beer.yeast })
     ).toBeInTheDocument();
-    expect(screen.getByText(beer.tagline)).toBeInTheDocument();
     expect(
       screen.getByRole("img", {
         name: /alcohol by volume less than or equal to 3%/i,
       })
     ).toBeInTheDocument();
-    expect(screen.getByText(beer.firstBrewedLabel)).toBeInTheDocument();
   });
 
   test("Should show remove button and saved label if it's saved", () => {
     const beer = beerToBeerView(generateBeer());
     mockedUseBeers.mockImplementation(() => ({ savedIds: [beer.id] }));
-    render(<BeersList onShowDetails={jest.fn()} data={[beer]} />);
+    render(<BeersGrid onShowDetails={jest.fn()} data={[beer]} />);
 
     expect(screen.getByRole("img", { name: /saved/i })).toBeInTheDocument();
   });
@@ -45,7 +43,7 @@ describe("BeersList", () => {
   test("Should show details on click", () => {
     const beer = beerToBeerView(generateBeer());
     const onShowDetails = jest.fn();
-    render(<BeersList onShowDetails={onShowDetails} data={[beer]} />);
+    render(<BeersGrid onShowDetails={onShowDetails} data={[beer]} />);
 
     const article = screen.getByTestId(`beer-${beer.id}`);
 
@@ -60,7 +58,7 @@ describe("BeersList", () => {
   test("Should show details on enter", () => {
     const beer = beerToBeerView(generateBeer());
     const onShowDetails = jest.fn();
-    render(<BeersList onShowDetails={onShowDetails} data={[beer]} />);
+    render(<BeersGrid onShowDetails={onShowDetails} data={[beer]} />);
 
     const article = screen.getByTestId(`beer-${beer.id}`);
 

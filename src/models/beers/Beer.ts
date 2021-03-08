@@ -10,6 +10,6 @@ export type Beer = {
   ingredients: {
     malt: { name: string }[];
     hops: { name: string }[];
-    yeast: string;
+    yeast?: string;
   };
 };

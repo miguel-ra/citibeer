@@ -37,9 +37,19 @@ function BeerDetail({
       <div className={classes.content}>
         <div className={classes.date}>{beer.firstBrewedLabel}</div>
         <h4 className={classes.name}>{beer.name}</h4>
+        <h6 className={classes.yeast}>{beer.yeast}</h6>
         <div className={classes.details}>
           <p className={classes.tagline}>{beer.tagline}</p>
           <p className={classes.description}>{beer.description}</p>
+          <div className={classes.ingredients}>
+            <strong>Malt:</strong> {beer.malt.join(" • ")}
+          </div>
+          <div className={classes.ingredients}>
+            <strong>Hops:</strong> {beer.hops.join(" • ")}
+          </div>
+          <div className={classes.ingredients}>
+            <strong>Food pairing:</strong> {beer.foodPairing.join(" • ")}
+          </div>
         </div>
         <div className={classes.actions}>
           {!isSaved && (

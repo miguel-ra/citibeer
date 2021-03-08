@@ -14,6 +14,7 @@ function BeersGrid({ data, onShowDetails }: BeersGridProps) {
     <section className={classes.container}>
       {data?.map((beer) => (
         <article
+          id={`beer-${beer.id}`}
           key={beer.id}
           className={classes.beer}
           tabIndex={0}
@@ -26,7 +27,11 @@ function BeersGrid({ data, onShowDetails }: BeersGridProps) {
             <img src={beer.imageUrl} alt={beer.name} />
             <figcaption>
               <AbvEmoji abv={beer.abv} />
-              {savedIds.includes(beer.id) ? "⭐️" : null}
+              {savedIds.includes(beer.id) ? (
+                <span role="img" aria-label="saved">
+                  ⭐️
+                </span>
+              ) : null}
             </figcaption>
           </figure>
           <div className={classes.details}>

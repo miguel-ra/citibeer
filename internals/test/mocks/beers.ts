@@ -20,11 +20,11 @@ function generateBeer(id: number = 0): Beer {
     abv: faker.random.number(20),
     food_pairing,
     ingredients: {
-      malt: [...new Array(faker.random.number(5))].map(() => ({
-        name: faker.random.word(),
+      malt: [...new Array(faker.random.number(3))].map(() => ({
+        name: faker.lorem.sentence(),
       })),
-      hops: [...new Array(faker.random.number(5))].map(() => ({
-        name: faker.random.word(),
+      hops: [...new Array(faker.random.number(3))].map(() => ({
+        name: faker.lorem.sentence(),
       })),
       yeast: faker.random.words(2),
     },

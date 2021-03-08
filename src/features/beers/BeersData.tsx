@@ -8,6 +8,7 @@ import BeerDetail from "./detail/BeerDetail";
 import BeersList from "./list/BeersList";
 import BeersGrid from "./grid/BeersGrid";
 import { useBeers } from "./beersContext";
+import classes from "./BeersData.module.scss";
 
 const observerOptions = { root: null, rootMargin: "300px", threshold: 0 };
 const pageSize = 24;
@@ -78,11 +79,11 @@ function BeersData() {
   }
 
   if (isError) {
-    return <p>Failed to get data</p>;
+    return <div className={classes.errorMessage}>Failed to get data</div>;
   }
 
   if (!beers.length) {
-    return <p>No data to display</p>;
+    return <div className={classes.errorMessage}>No data to display</div>;
   }
 
   const Component = viewMode === "list" ? BeersList : BeersGrid;
