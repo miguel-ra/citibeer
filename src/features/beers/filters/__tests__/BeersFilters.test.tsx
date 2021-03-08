@@ -40,9 +40,19 @@ describe("BeersFilters", () => {
 
     expect(
       screen.getByRole("checkbox", {
-        name: /show only favorite beers/i,
+        name: /show only saved beers/i,
       })
     ).toBeInTheDocument();
+
+    const viewSelect = screen.getByRole("combobox", {
+      name: /view/i,
+    }) as HTMLSelectElement;
+
+    expect(viewSelect).toBeInTheDocument();
+    expect(viewSelect.options).toHaveLength(2);
+    expect(
+      Array.from(viewSelect.options).map((element) => element.value)
+    ).toEqual(expect.arrayContaining(["list", "grid"]));
   });
 
   test("Should update beerName", async () => {
@@ -99,7 +109,7 @@ describe("BeersFilters", () => {
     expect(updateFilter()).toStrictEqual({ firstBrewed: "2000" });
   });
 
-  test("Should update showFavorites", async () => {
+  test("Should update showSaved", async () => {
     const setFilters = jest.fn();
     mockedUseBeers.mockImplementation(() => ({
       filters: {},
@@ -112,13 +122,40 @@ describe("BeersFilters", () => {
     );
 
     const checkbox = screen.getByRole("checkbox", {
-      name: /show only favorite beers/i,
+      name: /show only saved beers/i,
     });
 
     userEvent.click(checkbox);
 
+    await waitFor(() => expect(setFilters).toHaveBeenCalled());
+
     const updateFilter = setFilters.mock.calls[0][0] as Function;
 
-    expect(updateFilter()).toStrictEqual({ showFavorites: true });
+    expect(updateFilter()).toStrictEqual({ showSaved: true });
+  });
+
+  test("Should update viewMode", async () => {
+    const setFilters = jest.fn();
+    mockedUseBeers.mockImplementation(() => ({
+      filters: {},
+      setFilters,
+    }));
+    render(
+      <BeersProvider>
+        <BeersFilters />
+      </BeersProvider>
+    );
+
+    const combobox = screen.getByRole("combobox", {
+      name: /view/i,
+    });
+
+    userEvent.selectOptions(combobox, ["grid"]);
+
+    await waitFor(() => expect(setFilters).toHaveBeenCalled());
+
+    const updateFilter = setFilters.mock.calls[0][0] as Function;
+
+    expect(updateFilter()).toStrictEqual({ viewMode: "grid" });
   });
 });

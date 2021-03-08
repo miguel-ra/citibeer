@@ -10,8 +10,8 @@ Using this API [https://punkapi.com/documentation/v2](https://punkapi.com/docume
 - Filter beers by name and first brewed date
 - Have a detailed view
 - Use emojis to represent abv values
-- **Extra 1**: Save favorite beers and respective filter to show them
-- **Extra 2**: Option to show the catalog as a gallery
+- **Extra 1**: Have a option to save beers and respective the respective option to show them
+- **Extra 2**: Have a option to show the catalog as a gallery
 
 ## Demo
 

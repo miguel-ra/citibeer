@@ -1,4 +1,5 @@
 @import "normalize.css/normalize";
+@import "./breakpoints.scss";
 @import "./colors";
 
 /**
@@ -47,12 +48,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 1.6rem;
+  overflow: hidden;
 }
 
 #root {
   position: absolute;
   width: 100%;
   height: 100%;
+  max-height: 100%;
   overflow: scroll;
 }
 
@@ -97,4 +100,31 @@ h5 {
 
 h6 {
   font-size: 2rem;
+}
+
+select,
+input[type="month"] {
+  appearance: none;
+  padding-right: 3rem;
+  cursor: pointer;
+
+  background-repeat: no-repeat;
+  background-size: 0.7rem auto;
+  background-position: calc(100% - 1.4rem) 0.7rem;
+
+  background-image: url('data:image/svg+xml;charset=utf-8, \
+  <svg aria-hidden="true" focusable="false" class="svg-icon" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="black" d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41z"></path></svg>');
+
+  transition: background-color 0.25s ease-in-out, transform 0.25s ease-in-out;
+
+  option {
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (max-width: $breakpointSmall) {
+  select {
+    width: 100%;
+    margin: 0.7rem 0;
+  }
 }

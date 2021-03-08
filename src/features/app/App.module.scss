@@ -9,7 +9,7 @@
   padding-bottom: 8rem;
   background-color: $purple;
 
-  @media screen and (min-width: $breakpointSmall) {
+  @media screen and (min-width: $breakpointMedium) {
     padding: 5rem;
     padding-bottom: 8rem;
   }
@@ -18,8 +18,12 @@
 .main {
   width: 100%;
   margin: 0 auto;
-  padding: 1.7rem 3.2rem;
+  padding: 1.7rem 3rem;
+  @media screen and (min-width: $breakpointSmall) {
+    padding: 1.7rem 5rem;
+  }
   @media screen and (min-width: $breakpointMedium) {
+    padding: 1.7rem 5rem;
     max-width: $breakpointLarge;
     padding: 0 3.2rem 3.2rem;
   }

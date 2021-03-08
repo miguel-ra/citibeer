@@ -11,11 +11,30 @@
   margin-top: -6rem;
   position: relative;
   display: grid;
-  grid-template-columns: 1fr;
   gap: 2rem;
 
-  @media screen and (min-width: $breakpointSmall) {
-    grid-template-columns: repeat(2, 1fr);
+  @media screen and (min-width: $breakpointMedium) {
     margin-top: -3rem;
+  }
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  @media screen and (min-width: $breakpointMedium) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.rowReverse {
+  @extend .row;
+  flex-direction: column-reverse;
+
+  @media screen and (min-width: $breakpointMedium) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 }

@@ -4,13 +4,17 @@
 
 .container {
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 4rem;
   margin-top: 6rem;
   margin-bottom: 2rem;
 
+  @media screen and (min-width: $breakpointSmall) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   @media screen and (min-width: $breakpointMedium) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -41,18 +45,17 @@
   position: relative;
   place-content: center;
   background-color: $turquoise;
-  border-top-left-radius: $borderRadius;
-  border-bottom-left-radius: $borderRadius;
-  width: 10rem;
+  border-radius: $borderRadius;
+  width: 100%;
   padding: 1rem;
   margin: 0;
-  z-index: 1;
 
   img {
     width: auto;
     height: auto;
     max-width: 8rem;
     max-height: 15rem;
+    z-index: 1;
     @media screen and (min-width: $breakpointSmall) {
       max-height: 20rem;
     }
@@ -74,35 +77,32 @@
       font-size: 5rem;
       line-height: 5rem;
     }
-  }
-
-  @media screen and (min-width: $breakpointSmall) {
-    width: 15rem;
-    padding: 2rem;
-  }
-
-  @media screen and (min-width: $breakpointLarge) {
-    width: 25rem;
+    z-index: 2;
+    display: block;
   }
 }
 
 .details {
   flex: 1;
-  padding: 1.5rem;
+  padding: 4rem;
   display: flex;
   flex-direction: column;
-  @media screen and (min-width: $breakpointSmall) {
-    padding: 2rem;
-  }
-}
-
-.date {
-  margin-bottom: 1rem;
-  text-align: right;
-  font-size: 1.4rem;
-  @media screen and (min-width: $breakpointSmall) {
-    margin-bottom: 2rem;
-    font-size: 1.6rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: absolute;
+  background-color: $purple;
+  width: 100%;
+  height: 100%;
+  border-radius: $borderRadius;
+  color: $white;
+  opacity: 0;
+  transition: opacity 0.2s linear;
+  will-change: opacity, transform;
+  z-index: 1;
+  user-select: none;
+  .beer:hover & {
+    opacity: 1;
   }
 }
 
@@ -131,8 +131,4 @@
   @media screen and (min-width: $breakpointLarge) {
     font-size: 1.8rem;
   }
-}
-
-.tagline {
-  margin-bottom: 0;
 }

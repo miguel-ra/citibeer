@@ -39,7 +39,7 @@ function CheckboxField({
         id={name}
         name={name}
         type="checkbox"
-        checked={onChange ? internalValue : false}
+        checked={onChange ? internalValue : undefined}
         onChange={onChange ? handleChange : undefined}
         className={clsx(classes.input, className)}
         {...props}

@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { useInfiniteQuery } from "react-query";
-import useBeersRepository from "services/beers/useBeersRepository";
 import useObserver from "shared/hooks/useObserver";
 import { useModal } from "store/modalContext";
 import Spinner from "components/spinner/Spinner";
-import beersViewModel, { BeerView } from "./beerViewModel";
+import { BeerView, useBeerView } from "./beerViewModel";
 import BeerDetail from "./detail/BeerDetail";
 import BeersList from "./list/BeersList";
+import BeersGrid from "./grid/BeersGrid";
 import { useBeers } from "./beersContext";
 
 const observerOptions = { root: null, rootMargin: "300px", threshold: 0 };
@@ -15,12 +15,12 @@ const pageSize = 24;
 function BeersData() {
   const [beers, setBeers] = useState<BeerView[]>([]);
   const {
-    favoriteIds,
-    addFavorite,
-    removeFavorite,
-    filters: { showFavorites, ...filters },
+    savedIds,
+    saveBeer,
+    removeBeer,
+    filters: { showSaved, viewMode, ...filters },
   } = useBeers();
-  const beerRepositroy = useBeersRepository({ showFavorites });
+  const { getAll, beerRepositroy } = useBeerView({ showSaved });
   const { openModal } = useModal();
   const {
     data,
@@ -32,11 +32,11 @@ function BeersData() {
     [
       "beers",
       JSON.stringify(filters),
-      showFavorites ? favoriteIds.length : 0,
+      showSaved ? savedIds.length : 0,
       beerRepositroy,
     ],
     ({ pageParam = { per_page: pageSize, page: 1 } }) => {
-      return beerRepositroy.getAll({ ...pageParam, ...filters });
+      return getAll({ ...pageParam, ...filters });
     },
     {
       getNextPageParam: (lastPage, pages) => {
@@ -55,13 +55,13 @@ function BeersData() {
       openModal(
         <BeerDetail
           beer={beer}
-          isFavorite={favoriteIds.includes(beer.id)}
-          addFavorite={addFavorite}
-          removeFavorite={removeFavorite}
+          isSaved={savedIds.includes(beer.id)}
+          saveBeer={saveBeer}
+          removeBeer={removeBeer}
         />
       );
     },
-    [addFavorite, favoriteIds, openModal, removeFavorite]
+    [saveBeer, savedIds, openModal, removeBeer]
   );
 
   const lastPage = data?.pages[data.pages.length - 1];
@@ -69,7 +69,7 @@ function BeersData() {
   useEffect(() => {
     if (!isLoading) {
       const newBeers = data?.pages ? data.pages.flat() : [];
-      setBeers(newBeers.map(beersViewModel));
+      setBeers(newBeers);
     }
   }, [data, isLoading]);
 
@@ -85,9 +85,11 @@ function BeersData() {
     return <p>No data to display</p>;
   }
 
+  const Component = viewMode === "list" ? BeersList : BeersGrid;
+
   return (
     <>
-      <BeersList data={beers} onShowDetails={handleBeerDetail} />
+      <Component data={beers} onShowDetails={handleBeerDetail} />
       {hasNextPage && lastPage?.length === pageSize && (
         <Spinner ref={loadMoreRef} visible />
       )}

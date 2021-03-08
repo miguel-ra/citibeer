@@ -38,14 +38,15 @@
 
   figcaption {
     position: absolute;
-    left: 1.5rem;
-    top: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    left: 0;
+    top: 0;
+    padding: 2rem;
     font-size: 5rem;
     line-height: 5rem;
-    transform: rotate(-10deg);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   @media screen and (min-width: $breakpointSmall) {

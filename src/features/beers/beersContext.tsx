@@ -8,10 +8,8 @@ import {
   useEffect,
   useState,
 } from "react";
-import omit from "lodash/omit";
 import BeersRepositoryInMemory from "services/beers/BeersRepositoryInMemory";
-import { Beer } from "models/beers/Beer";
-import { BeerView } from "./beerViewModel";
+import { BeerView, beerViewToBeer } from "./beerViewModel";
 
 const beersRepositoryInMemory = new BeersRepositoryInMemory();
 
@@ -22,23 +20,26 @@ type BeersProviderProps = {
 type Filters = {
   beerName?: string;
   firstBrewed?: string;
-  showFavorites?: boolean;
+  showSaved?: boolean;
+  viewMode: "list" | "grid";
 };
 
 type BeersContextValue = {
   filters: Filters;
   setFilters: Dispatch<SetStateAction<Filters>>;
-  favoriteIds: number[];
-  addFavorite: (beer: BeerView) => void;
-  removeFavorite: (beerId: number) => void;
+  savedIds: number[];
+  saveBeer: (beer: BeerView) => void;
+  removeBeer: (beerId: number) => void;
 };
 
 const initialValue = {
-  filters: {},
+  filters: {
+    viewMode: "list" as const,
+  },
   setFilters: () => {},
-  favoriteIds: [],
-  addFavorite: () => {},
-  removeFavorite: () => {},
+  savedIds: [],
+  saveBeer: () => {},
+  removeBeer: () => {},
 };
 
 const BeersContext = createContext<BeersContextValue>(initialValue);
@@ -54,47 +55,27 @@ function useBeers() {
 
 function BeersProvider({ children }: BeersProviderProps) {
   const [filters, setFilters] = useState<Filters>(initialValue.filters);
-  const [favoriteIds, setFavoriteIds] = useState<number[]>(
-    initialValue.favoriteIds
-  );
+  const [savedIds, setSavedIds] = useState<number[]>(initialValue.savedIds);
 
   useEffect(() => {
     beersRepositoryInMemory.getAll().then((data) => {
-      const storedFavorites = data.map((beer) => beer.id);
-      if (storedFavorites.length) {
-        setFavoriteIds(storedFavorites);
+      const storedBeers = data.map((beer) => beer.id);
+      if (storedBeers.length) {
+        setSavedIds(storedBeers);
       }
     });
   }, []);
 
-  const addFavorite = useCallback((beerView: BeerView) => {
-    const beer: Beer = {
-      ...omit(beerView, [
-        "imageUrl",
-        "firstBrewedLabel",
-        "firstBrewedMonth",
-        "firstBrewedYear",
-        "foodPairing",
-      ]),
-      image_url: beerView.imageUrl,
-      first_brewed: [beerView.firstBrewedMonth, beerView.firstBrewedYear]
-        .filter(Boolean)
-        .join("/"),
-      food_pairing: beerView.foodPairing,
-    };
+  const saveBeer = useCallback((beerView: BeerView) => {
     beersRepositoryInMemory
-      .add(beer)
-      .then((newFavorites) =>
-        setFavoriteIds(newFavorites.map((beer) => beer.id))
-      );
+      .add(beerViewToBeer(beerView))
+      .then((storedBeers) => setSavedIds(storedBeers.map((beer) => beer.id)));
   }, []);
 
-  const removeFavorite = useCallback((beerId: number) => {
+  const removeBeer = useCallback((beerId: number) => {
     beersRepositoryInMemory
       .remove(beerId)
-      .then((newFavorites) =>
-        setFavoriteIds(newFavorites.map((beer) => beer.id))
-      );
+      .then((storedBeers) => setSavedIds(storedBeers.map((beer) => beer.id)));
   }, []);
 
   return (
@@ -102,9 +83,9 @@ function BeersProvider({ children }: BeersProviderProps) {
       value={{
         filters,
         setFilters,
-        favoriteIds,
-        addFavorite,
-        removeFavorite,
+        savedIds,
+        saveBeer,
+        removeBeer,
       }}
     >
       {children}

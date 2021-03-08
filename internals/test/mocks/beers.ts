@@ -1,4 +1,4 @@
-import faker from "faker";
+import faker, { fake } from "faker";
 import { Beer } from "models/beers/Beer";
 
 function generateBeer(id: number = 0): Beer {
@@ -19,6 +19,15 @@ function generateBeer(id: number = 0): Beer {
     first_brewed: `${month}/${year}`,
     abv: faker.random.number(20),
     food_pairing,
+    ingredients: {
+      malt: [...new Array(faker.random.number(5))].map(() => ({
+        name: faker.random.word(),
+      })),
+      hops: [...new Array(faker.random.number(5))].map(() => ({
+        name: faker.random.word(),
+      })),
+      yeast: faker.random.words(2),
+    },
   };
 }
 

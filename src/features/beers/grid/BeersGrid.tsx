@@ -1,14 +1,14 @@
 import AbvEmoji from "components/emoji/AbvEmoji";
-import classes from "./BeersList.module.scss";
+import classes from "./BeersGrid.module.scss";
 import { BeerView } from "../beerViewModel";
 import { useBeers } from "../beersContext";
 
-type BeersListProps = {
+type BeersGridProps = {
   data: BeerView[];
   onShowDetails: (beer: BeerView) => void;
 };
 
-function BeersList({ data, onShowDetails }: BeersListProps) {
+function BeersGrid({ data, onShowDetails }: BeersGridProps) {
   const { savedIds } = useBeers();
   return (
     <section className={classes.container}>
@@ -26,18 +26,12 @@ function BeersList({ data, onShowDetails }: BeersListProps) {
             <img src={beer.imageUrl} alt={beer.name} />
             <figcaption>
               <AbvEmoji abv={beer.abv} />
-              {savedIds.includes(beer.id) ? (
-                <span role="img" aria-label="saved">
-                  ⭐️
-                </span>
-              ) : null}
+              {savedIds.includes(beer.id) ? "⭐️" : null}
             </figcaption>
           </figure>
           <div className={classes.details}>
-            <div className={classes.date}>{beer.firstBrewedLabel}</div>
             <h4 className={classes.name}>{beer.name}</h4>
             <h6 className={classes.yeast}>{beer.yeast}</h6>
-            <p className={classes.tagline}>{beer.tagline}</p>
           </div>
         </article>
       ))}
@@ -45,4 +39,4 @@ function BeersList({ data, onShowDetails }: BeersListProps) {
   );
 }
 
-export default BeersList;
+export default BeersGrid;

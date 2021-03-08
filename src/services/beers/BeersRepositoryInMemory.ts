@@ -1,4 +1,3 @@
-import { date } from "faker";
 import { Beer } from "models/beers/Beer";
 import { BeersRepository, GetAllParams } from "models/beers/BeersRepository";
 
@@ -35,16 +34,20 @@ function compareDates(
   return year === dateToMatch.year && month === dateToMatch.month;
 }
 
-class BeerRepositoryInMemory implements BeersRepository {
-  serialize: (value: any) => string;
-  deserialize: (text: string) => any;
-  storageKey: string;
-
-  constructor() {
-    this.storageKey = "favoriteBeers";
-    this.serialize = JSON.stringify;
-    this.deserialize = JSON.parse;
+function compareIds(beerA: Beer, beerB: Beer) {
+  if (beerA.id < beerB.id) {
+    return -1;
   }
+  if (beerA.id > beerB.id) {
+    return 1;
+  }
+  return 0;
+}
+
+class BeerRepositoryInMemory implements BeersRepository {
+  serialize = JSON.stringify;
+  deserialize = JSON.parse;
+  storageKey = "savedBeers";
 
   private getLocalStorageItem() {
     const valueInLocalStorage = window.localStorage.getItem(this.storageKey);
@@ -83,28 +86,21 @@ class BeerRepositoryInMemory implements BeersRepository {
       data = data.slice(pageStartsAt, pageStartsAt + per_page);
     }
 
-    return data.reverse() || [];
+    return data.sort(compareIds) || [];
   }
 
   async add(beer: Beer) {
     const data = this.getLocalStorageItem();
-
     const filteredData = data.filter((item) => item.id !== beer.id);
-
     const newData = [...filteredData, beer];
-
     this.setLocalStorageItem(newData);
-
     return newData;
   }
 
   async remove(beerId: number) {
     const data = this.getLocalStorageItem();
-
     const filteredData = data.filter((item) => item.id !== beerId);
-
     this.setLocalStorageItem(filteredData);
-
     return filteredData;
   }
 }

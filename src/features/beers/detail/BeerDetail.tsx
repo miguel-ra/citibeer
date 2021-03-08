@@ -7,19 +7,19 @@ import { BeerView } from "../beerViewModel";
 
 type BeerDetailProps = {
   beer: BeerView;
-  isFavorite: boolean;
-  addFavorite: (beer: BeerView) => void;
-  removeFavorite: (beerId: number) => void;
+  isSaved: boolean;
+  saveBeer: (beer: BeerView) => void;
+  removeBeer: (beerId: number) => void;
 };
 
 function BeerDetail({
   beer,
-  isFavorite: isFavoriteProp,
-  addFavorite,
-  removeFavorite,
+  isSaved: isSavedProp,
+  saveBeer,
+  removeBeer,
 }: BeerDetailProps) {
   const { closeModal } = useModal();
-  const [isFavorite, setIsFavorite] = useState(isFavoriteProp);
+  const [isSaved, setIsSaved] = useState(isSavedProp);
 
   return (
     <div className={classes.wrapper}>
@@ -27,6 +27,11 @@ function BeerDetail({
         <img src={beer.imageUrl} alt={beer.name} />
         <figcaption>
           <AbvEmoji abv={beer.abv} />
+          {isSaved ? (
+            <span role="img" aria-label="saved">
+              ⭐️
+            </span>
+          ) : null}
         </figcaption>
       </figure>
       <div className={classes.content}>
@@ -37,27 +42,27 @@ function BeerDetail({
           <p className={classes.description}>{beer.description}</p>
         </div>
         <div className={classes.actions}>
-          {!isFavorite && (
+          {!isSaved && (
             <Button
               onClick={() => {
-                addFavorite(beer);
-                setIsFavorite(true);
+                saveBeer(beer);
+                setIsSaved(true);
               }}
             >
-              Agregar
+              Save
             </Button>
           )}
-          {isFavorite && (
+          {isSaved && (
             <Button
               onClick={() => {
-                removeFavorite(beer.id);
-                setIsFavorite(false);
+                removeBeer(beer.id);
+                setIsSaved(false);
               }}
             >
-              Eliminar
+              Remove
             </Button>
           )}
-          <Button onClick={() => closeModal()}>Cerrar</Button>
+          <Button onClick={() => closeModal()}>Close</Button>
         </div>
       </div>
     </div>

@@ -7,4 +7,9 @@ export type Beer = {
   first_brewed: string;
   abv: number;
   food_pairing: string[];
+  ingredients: {
+    malt: { name: string }[];
+    hops: { name: string }[];
+    yeast: string;
+  };
 };
