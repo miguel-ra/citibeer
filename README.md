@@ -71,7 +71,7 @@ To decouple even more the view from the model I have implemented MVVM pattern, w
 
 - Button to scroll to top if user has scrolled down
 - Add more options to filter beers (abv, yeast ...)
-- Save selected filters and view mode so that they still selected after page reload
+- Save selected filters and view mode so they still selected after page reload
 - Make back button on android close the modal instead of exiting the application
 
 ### Test performance
