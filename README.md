@@ -41,7 +41,7 @@ npm test
 npm build
 ```
 
-## Architecture:
+## Architecture
 
 I have implemented the application following hexagonal architecture, separating logic by layers (infrastructure, application and domain).
 
@@ -58,14 +58,14 @@ This allows us to modify extenal layers without affecting the internal ones, als
 
 To decouple even more the view from the model I have implemented MVVM pattern, which through a view model ([beerViewModel.ts](https://github.com/miguel-ra/citibeer/blob/master/src/features/beers/beerViewModel.ts)) manages the access to the data model. This is very interesting because it allows us to parse and compute data that is going to use in the view.
 
-## Libraries:
+## Libraries
 
 - **Routing:** I have not used it because I don't think it is necessary as we only show a list and a modal for the detail view.
 - **Styles:** I have used Sass modules, to define scope styles for components. I have decided to use this library because I like to have the posibility to copy styles from browser to the code and because the theme do not change according to the user's preferences.
 - **HTTP requests:** I have decided to use Fetch API because the requirements are very simple (we don't need to intercept request, attach cookies to the requests or have a complex error handler)
 - **State management:** I always try to have the state where it is needed, for this application we would need to store the beer view options and the beer list. I have used the Context API to store the beer view options in the view layer because I think the data has to be where it is needed and I don't find it interesting to add a global state manager like redux to manage this kind of data. One of the reasons to use redux would be to store the list of beers, the same Is this list going to be needed in other parts of our application? I don't think so and this is why I don't store the beer list globally (I'm using react-query to handle cache, background updates and stale data).
 
-## TODOs:
+## TODOs
 
 ### Improve functionality
 
